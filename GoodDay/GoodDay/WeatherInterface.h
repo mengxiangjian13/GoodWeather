@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CurrentWeatherModel.h"
+#import "CurrentWeatherViewModel.h"
 
 typedef void (^SuccessBlock)(id model);
 typedef void (^FailureBlock)(NSError *error);

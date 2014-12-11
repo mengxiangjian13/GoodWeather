@@ -53,14 +53,14 @@
     __weak SummaryView *weakSummaryView = summaryView;
     [[WeatherInterface sharedInterface] currentWeatherWithCity:@"beijing"
                                                        success:^(id model) {
-                                                           if ([model isKindOfClass:[CurrentWeatherModel class]])
+                                                           if ([model isKindOfClass:[CurrentWeatherViewModel class]])
                                                            {
-                                                               CurrentWeatherModel *weather = (CurrentWeatherModel *)model;
+                                                               CurrentWeatherViewModel *weather = (CurrentWeatherViewModel *)model;
                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                    weakSummaryView.statusLabel.text = weather.condition;
-                                                                   weakSummaryView.icon.image = [UIImage imageNamed:weather.iconImageName];
-                                                                   weakSummaryView.currentTemperatureLabel.text = [NSString stringWithFormat:@"%.1f ℃",weather.currentTemperature.floatValue];
-                                                                   weakSummaryView.floatTemperatureLabel.text = [NSString stringWithFormat:@"%.1f℃ / %.1f ℃",weather.maxTemperature.floatValue,weather.minTemperature.floatValue];
+                                                                   weakSummaryView.icon.image = weather.icon;
+                                                                   weakSummaryView.currentTemperatureLabel.text = weather.currentTemperature;
+                                                                   weakSummaryView.floatTemperatureLabel.text = weather.floatTemperature;
                                                                });
                                                            }
                                                        } failure:^(NSError *error) {

@@ -89,7 +89,8 @@
                                 CurrentWeatherModel *model = [MTLJSONAdapter modelOfClass:[CurrentWeatherModel class]
                                                                        fromJSONDictionary:dict
                                                                                     error:nil];
-                                success(model);
+                                CurrentWeatherViewModel *viewModel = [[CurrentWeatherViewModel alloc] initWithWeatherModel:model];
+                                success(viewModel);
                             }
                             else
                             {

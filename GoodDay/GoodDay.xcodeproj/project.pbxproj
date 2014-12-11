@@ -20,6 +20,7 @@
 		CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36401A36E4BE007D99FF /* Images.xcassets */; };
 		CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */; };
 		CE9F36501A36E4BE007D99FF /* GoodDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */; };
+		CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		CE9F36491A36E4BE007D99FF /* GoodDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoodDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9F364E1A36E4BE007D99FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodDayTests.m; sourceTree = "<group>"; };
+		CEF313671A39A05A007EADE7 /* CurrentWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherViewModel.h; sourceTree = "<group>"; };
+		CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +157,7 @@
 				CE9F363D1A36E4BE007D99FF /* Main.storyboard */,
 				CE9F36401A36E4BE007D99FF /* Images.xcassets */,
 				CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */,
+				CEF313661A39A030007EADE7 /* ViewModel */,
 				CE5F845D1A37FB3200545EA4 /* data */,
 				CE5F84571A37EDF400545EA4 /* view */,
 				CE5F84541A37E85F00545EA4 /* resources */,
@@ -186,6 +190,15 @@
 				CE9F364E1A36E4BE007D99FF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEF313661A39A030007EADE7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEF313671A39A05A007EADE7 /* CurrentWeatherViewModel.h */,
+				CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */,
+			);
+			name = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +343,7 @@
 				CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */,
 				CE9F36391A36E4BE007D99FF /* AppDelegate.m in Sources */,
 				CE9F36361A36E4BE007D99FF /* main.m in Sources */,
+				CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */,
 				CE5F84601A37FB8C00545EA4 /* WeatherInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

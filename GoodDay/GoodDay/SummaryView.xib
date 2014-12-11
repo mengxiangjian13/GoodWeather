@@ -45,7 +45,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fca-VK-pB8">
-                    <rect key="frame" x="20" y="536" width="560" height="30"/>
+                    <rect key="frame" x="20" y="526" width="560" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="kf9-XM-OC4"/>
                     </constraints>
@@ -60,7 +60,7 @@
                 <constraint firstItem="5H4-EK-ghc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G92-WT-dei"/>
                 <constraint firstAttribute="bottom" secondItem="iRJ-Sq-UrD" secondAttribute="bottom" constant="154" id="NQV-w8-9Jo"/>
                 <constraint firstAttribute="bottom" secondItem="8uc-55-6LY" secondAttribute="bottom" constant="150" id="Tsn-2M-Dcs"/>
-                <constraint firstItem="Fca-VK-pB8" firstAttribute="top" secondItem="h1d-zO-h2P" secondAttribute="bottom" constant="10" id="VCo-1X-NL0"/>
+                <constraint firstItem="Fca-VK-pB8" firstAttribute="top" secondItem="h1d-zO-h2P" secondAttribute="bottom" id="VCo-1X-NL0"/>
                 <constraint firstItem="8uc-55-6LY" firstAttribute="leading" secondItem="iRJ-Sq-UrD" secondAttribute="trailing" constant="20" id="bnH-6u-suZ"/>
                 <constraint firstItem="Fca-VK-pB8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="eMc-2z-SaX"/>
                 <constraint firstItem="h1d-zO-h2P" firstAttribute="top" secondItem="iRJ-Sq-UrD" secondAttribute="bottom" id="ePl-DI-zxa"/>
