@@ -16,6 +16,11 @@
 {
     UIImageView *blurImageView;
     UITableView *weatherTableView;
+    
+    // hourly forecast datasource
+    NSMutableArray *hourForecastArray;
+    // daily forecast datasource
+    NSMutableArray *dailyForecastArray;
 }
 
 @end
@@ -25,8 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // set TSMessage default viewcontroller
     [TSMessage setDefaultViewController:self];
     
+    // initialize datasource container
+    hourForecastArray = [[NSMutableArray alloc] init];
+    dailyForecastArray = [[NSMutableArray alloc] init];
+    
+    // main UI
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     backgroundImageView.image = [UIImage imageNamed:@"images/bg"];
     backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -48,6 +60,9 @@
     
     // show tableHeader
     [self showCurrentWeather];
+    
+    // hourly forecast data
+    [self showHourlyForecast];
 }
 
 - (void)showCurrentWeather
@@ -79,27 +94,79 @@
                                                        }];
 }
 
+- (void)showHourlyForecast
+{
+    [[WeatherInterface sharedInterface] hourlyforecastWithCity:@"beijing"
+                                                       success:^(id model) {
+                                                           if ([model isKindOfClass:[NSArray class]])
+                                                           {
+                                                               [hourForecastArray addObjectsFromArray:model];
+                                                               [weatherTableView reloadData];
+                                                           }
+                                                       } failure:^(NSError *error) {
+                                                           [TSMessage showNotificationWithTitle:@"更新失败"
+                                                                                       subtitle:@"请检查网络状况是否畅通"
+                                                                                           type:TSMessageNotificationTypeError];
+                                                       }];
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 100;
+    if (section == 0)
+    {
+        return [hourForecastArray count] + 1; // plus 1 because of section header
+    }
+    
+    return [dailyForecastArray count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell)
+    UITableViewCell *cell = nil;
+    if (indexPath.row != 0)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        static NSString *identifier = @"cell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        }
+        
+        HourlyWeatherViewModel *hModel = hourForecastArray[indexPath.row-1];
+        
+        cell.imageView.image = hModel.icon;
+        cell.detailTextLabel.text = hModel.temperature;
+        cell.textLabel.text = hModel.date;
+    }
+    else
+    {
+        static NSString *identifier = @"header";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
+    
+    if (indexPath.row == 0)
+    {
+        if (indexPath.section == 0)
+        {
+            cell.textLabel.text = @"24小时预报";
+        }
+        else
+        {
+            cell.textLabel.text = @"7天预报";
+        }
+    }
     
     return cell;
 }

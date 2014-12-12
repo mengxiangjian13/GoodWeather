@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "CurrentWeatherViewModel.h"
+#import "HourlyWeatherViewModel.h"
+
 
 typedef void (^SuccessBlock)(id model);
 typedef void (^FailureBlock)(NSError *error);
@@ -17,6 +19,10 @@ typedef void (^FailureBlock)(NSError *error);
 + (instancetype)sharedInterface;
 
 - (void)currentWeatherWithCity:(NSString *)city
+                       success:(SuccessBlock)success
+                       failure:(FailureBlock)failure;
+
+- (void)hourlyforecastWithCity:(NSString *)city
                        success:(SuccessBlock)success
                        failure:(FailureBlock)failure;
 

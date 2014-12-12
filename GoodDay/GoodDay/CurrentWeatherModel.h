@@ -19,5 +19,6 @@
 @property (nonatomic,strong) NSNumber *windDegree;
 @property (nonatomic,strong) NSNumber *windSpeed;
 
++ (NSDictionary *)imageMap;
 
 @end

@@ -102,7 +102,44 @@
                         }];
 }
 
-
+- (void)hourlyforecastWithCity:(NSString *)city
+                       success:(SuccessBlock)success
+                       failure:(FailureBlock)failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?q=%@&lang=zh_cn&units=metric",city];
+    [self generalRequestWithURL:url
+                        success:^(id model) {
+                            if ([model isKindOfClass:[NSDictionary class]])
+                            {
+                                NSDictionary *dict = (NSDictionary *)model;
+                                id list = [dict objectForKey:@"list"];
+                                if ([list isKindOfClass:[NSArray class]])
+                                {
+                                    NSArray *_list = (NSArray *)list;
+                                    NSArray *modelList = [MTLJSONAdapter modelsOfClass:[HourlyWeatherModel class]
+                                                                         fromJSONArray:_list
+                                                                                 error:nil];
+                                    NSMutableArray *viewModelArray = [[NSMutableArray alloc] init];
+                                    for (HourlyWeatherModel *model in modelList)
+                                    {
+                                        HourlyWeatherViewModel *viewModel = [[HourlyWeatherViewModel alloc] initWithWeatherModel:model];
+                                        [viewModelArray addObject:viewModel];
+                                    }
+                                    success(viewModelArray);
+                                }
+                                else
+                                {
+                                    failure(nil);
+                                }
+                            }
+                            else
+                            {
+                                failure(nil);
+                            }
+                        } failure:^(NSError *error) {
+                            failure(error);
+                        }];
+}
 
 
 
