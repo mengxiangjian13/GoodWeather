@@ -15,6 +15,7 @@
 @interface ViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     UIImageView *blurImageView;
+    UITableView *weatherTableView;
 }
 
 @end
@@ -37,18 +38,24 @@
     [blurImageView setImageToBlur:[UIImage imageNamed:@"images/bg"] blurRadius:10.0 completionBlock:nil];
     [self.view addSubview:blurImageView];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
-    tableView.pagingEnabled = YES;
-    [self.view addSubview:tableView];
+    weatherTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    weatherTableView.delegate = self;
+    weatherTableView.dataSource = self;
+    weatherTableView.backgroundColor = [UIColor clearColor];
+    weatherTableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
+    weatherTableView.pagingEnabled = YES;
+    [self.view addSubview:weatherTableView];
     
+    // show tableHeader
+    [self showCurrentWeather];
+}
+
+- (void)showCurrentWeather
+{
     SummaryView *summaryView = [[[NSBundle mainBundle] loadNibNamed:@"SummaryView" owner:self options:nil] lastObject];
     summaryView.frame = self.view.bounds;
     summaryView.cityLabel.text = @"Beijing";
-    tableView.tableHeaderView = summaryView;
+    weatherTableView.tableHeaderView = summaryView;
     
     __weak SummaryView *weakSummaryView = summaryView;
     [[WeatherInterface sharedInterface] currentWeatherWithCity:@"beijing"
@@ -57,14 +64,16 @@
                                                            {
                                                                CurrentWeatherViewModel *weather = (CurrentWeatherViewModel *)model;
                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                   weakSummaryView.statusLabel.text = weather.condition;
+                                                                   weakSummaryView.conditionLabel.text = weather.condition;
                                                                    weakSummaryView.icon.image = weather.icon;
                                                                    weakSummaryView.currentTemperatureLabel.text = weather.currentTemperature;
                                                                    weakSummaryView.floatTemperatureLabel.text = weather.floatTemperature;
+                                                                   weakSummaryView.otherConditionLabel.text = weather.otherCondition;
+                                                                   [weakSummaryView showWeatherWithAnimation:YES];
                                                                });
                                                            }
                                                        } failure:^(NSError *error) {
-                                                           [TSMessage showNotificationWithTitle:@"请求失败"
+                                                           [TSMessage showNotificationWithTitle:@"更新失败"
                                                                                        subtitle:@"请检查网络状况是否畅通"
                                                                                            type:TSMessageNotificationTypeError];
                                                        }];
@@ -93,6 +102,11 @@
     cell.detailTextLabel.textColor = [UIColor whiteColor];
     
     return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
 #pragma mark UIScrollViewDelegate

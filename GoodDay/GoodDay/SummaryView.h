@@ -10,10 +10,13 @@
 
 @interface SummaryView : UIView
 
-@property (nonatomic,strong) IBOutlet UILabel *cityLabel;
-@property (nonatomic,strong) IBOutlet UIImageView *icon;
-@property (nonatomic,strong) IBOutlet UILabel *statusLabel;
-@property (nonatomic,strong) IBOutlet UILabel *currentTemperatureLabel;
-@property (nonatomic,strong) IBOutlet UILabel *floatTemperatureLabel;
+@property (nonatomic,weak) IBOutlet UILabel *cityLabel;
+@property (nonatomic,weak) IBOutlet UIImageView *icon;
+@property (nonatomic,weak) IBOutlet UILabel *conditionLabel;
+@property (nonatomic,weak) IBOutlet UILabel *currentTemperatureLabel;
+@property (nonatomic,weak) IBOutlet UILabel *floatTemperatureLabel;
+@property (weak,nonatomic) IBOutlet UILabel *otherConditionLabel;
+
+- (void)showWeatherWithAnimation:(BOOL)animation;
 
 @end

@@ -16,6 +16,7 @@
 @property (nonatomic,strong)  NSString *condition;
 @property (nonatomic,strong)  NSString *currentTemperature;
 @property (nonatomic,strong)  NSString *floatTemperature;
+@property (nonatomic,strong)  NSString *otherCondition;
 
 - (instancetype)initWithWeatherModel:(CurrentWeatherModel *)model;
 

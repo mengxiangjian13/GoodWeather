@@ -43,7 +43,9 @@
              @"iconImageName" : @"weather.icon",
              @"currentTemperature" : @"main.temp",
              @"minTemperature" : @"main.temp_min",
-             @"maxTemperature" : @"main.temp_max"};
+             @"maxTemperature" : @"main.temp_max",
+             @"windDegree" : @"wind.deg",
+             @"windSpeed" : @"wind.speed"};
 }
 
 + (NSValueTransformer *)conditionJSONTransformer

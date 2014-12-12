@@ -16,5 +16,8 @@
 @property (nonatomic,strong) NSNumber *currentTemperature;
 @property (nonatomic,strong) NSNumber *minTemperature;
 @property (nonatomic,strong) NSNumber *maxTemperature;
+@property (nonatomic,strong) NSNumber *windDegree;
+@property (nonatomic,strong) NSNumber *windSpeed;
+
 
 @end

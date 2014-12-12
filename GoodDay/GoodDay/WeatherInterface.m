@@ -58,6 +58,7 @@
                                                                                               error:&error];
                                                 if (object && !error)
                                                 {
+                                                    NSLog(@"%@:%@",url,object);
                                                     success(object);
                                                 }
                                                 else
