@@ -63,6 +63,9 @@
     
     // hourly forecast data
     [self showHourlyForecast];
+    
+    // daily forecast data
+    [self showDailyForecast];
 }
 
 - (void)showCurrentWeather
@@ -111,6 +114,23 @@
                                                        }];
 }
 
+- (void)showDailyForecast
+{
+    [[WeatherInterface sharedInterface] dailyforecastWithCity:@"beijing"
+                                                     dayCount:7
+                                                      success:^(id model) {
+                                                          if ([model isKindOfClass:[NSArray class]])
+                                                          {
+                                                              [dailyForecastArray addObjectsFromArray:model];
+                                                              [weatherTableView reloadData];
+                                                          }
+                                                      } failure:^(NSError *error) {
+                                                          [TSMessage showNotificationWithTitle:@"更新失败"
+                                                                                      subtitle:@"请检查网络状况是否畅通"
+                                                                                          type:TSMessageNotificationTypeError];
+                                                      }];
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource UITableViewDelegate
 
@@ -136,11 +156,21 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         }
         
-        HourlyWeatherViewModel *hModel = hourForecastArray[indexPath.row-1];
+        if (indexPath.section == 0)
+        {
+            HourlyWeatherViewModel *hModel = hourForecastArray[indexPath.row-1];
+            cell.imageView.image = hModel.icon;
+            cell.detailTextLabel.text = hModel.temperature;
+            cell.textLabel.text = hModel.date;
+        }
+        else
+        {
+            DailyWeatherViewModel *dModel = dailyForecastArray[indexPath.row-1];
+            cell.imageView.image = dModel.icon;
+            cell.detailTextLabel.text = dModel.temperature;
+            cell.textLabel.text = dModel.date;
+        }
         
-        cell.imageView.image = hModel.icon;
-        cell.detailTextLabel.text = hModel.temperature;
-        cell.textLabel.text = hModel.date;
     }
     else
     {

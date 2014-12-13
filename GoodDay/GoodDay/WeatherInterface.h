@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CurrentWeatherViewModel.h"
 #import "HourlyWeatherViewModel.h"
+#import "DailyWeatherViewModel.h"
 
 
 typedef void (^SuccessBlock)(id model);
@@ -26,5 +27,10 @@ typedef void (^FailureBlock)(NSError *error);
                      hourCount:(NSInteger)count
                        success:(SuccessBlock)success
                        failure:(FailureBlock)failure;
+
+- (void)dailyforecastWithCity:(NSString *)city
+                    dayCount:(NSInteger)count
+                    success:(SuccessBlock)success
+                    failure:(FailureBlock)failure;
 
 @end
