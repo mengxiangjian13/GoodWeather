@@ -26,7 +26,8 @@
 {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"h a";
+//    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    formatter.dateFormat = @"h:mm a";
     return [formatter stringFromDate:date];
 }
 

@@ -97,6 +97,7 @@
 - (void)showHourlyForecast
 {
     [[WeatherInterface sharedInterface] hourlyforecastWithCity:@"beijing"
+                                                     hourCount:8
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[NSArray class]])
                                                            {
@@ -111,7 +112,7 @@
 }
 
 #pragma mark -
-#pragma mark UITableViewDataSource
+#pragma mark UITableViewDataSource UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -174,6 +175,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return MAX(44, tableView.bounds.size.height / ((CGFloat)[hourForecastArray count]+1));
 }
 
 #pragma mark UIScrollViewDelegate

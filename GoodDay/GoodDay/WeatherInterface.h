@@ -23,6 +23,7 @@ typedef void (^FailureBlock)(NSError *error);
                        failure:(FailureBlock)failure;
 
 - (void)hourlyforecastWithCity:(NSString *)city
+                     hourCount:(NSInteger)count
                        success:(SuccessBlock)success
                        failure:(FailureBlock)failure;
 

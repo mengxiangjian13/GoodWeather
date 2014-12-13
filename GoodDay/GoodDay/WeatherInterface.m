@@ -103,6 +103,7 @@
 }
 
 - (void)hourlyforecastWithCity:(NSString *)city
+                     hourCount:(NSInteger)count
                        success:(SuccessBlock)success
                        failure:(FailureBlock)failure
 {
@@ -120,10 +121,21 @@
                                                                          fromJSONArray:_list
                                                                                  error:nil];
                                     NSMutableArray *viewModelArray = [[NSMutableArray alloc] init];
+                                    // choose hourly weather after now
+                                    NSInteger validCount = 0;
                                     for (HourlyWeatherModel *model in modelList)
                                     {
-                                        HourlyWeatherViewModel *viewModel = [[HourlyWeatherViewModel alloc] initWithWeatherModel:model];
-                                        [viewModelArray addObject:viewModel];
+                                        NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+                                        if ([model.timestamp integerValue] > timestamp)
+                                        {
+                                            HourlyWeatherViewModel *viewModel = [[HourlyWeatherViewModel alloc] initWithWeatherModel:model];
+                                            [viewModelArray addObject:viewModel];
+                                            ++ validCount;
+                                            if (validCount == count)
+                                            {
+                                                break;
+                                            }
+                                        }
                                     }
                                     success(viewModelArray);
                                 }
