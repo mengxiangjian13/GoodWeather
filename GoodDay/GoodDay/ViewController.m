@@ -40,14 +40,14 @@
     
     // main UI
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    backgroundImageView.image = [UIImage imageNamed:@"images/bg"];
+    backgroundImageView.image = [UIImage imageNamed:@"Images/bg"];
     backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:backgroundImageView];
     
     blurImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     blurImageView.contentMode = UIViewContentModeScaleAspectFill;
     blurImageView.alpha = 0.0;
-    [blurImageView setImageToBlur:[UIImage imageNamed:@"images/bg"] blurRadius:10.0 completionBlock:nil];
+    [blurImageView setImageToBlur:[UIImage imageNamed:@"Images/bg"] blurRadius:10.0 completionBlock:nil];
     [self.view addSubview:blurImageView];
     
     weatherTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
