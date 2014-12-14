@@ -2,7 +2,7 @@ PODS:
   - HexColors (2.2.1)
   - LBBlurredImage (0.2.0)
   - Mantle (1.5):
-    - Mantle/extobjc
+    - Mantle/extobjc (= 1.5)
   - Mantle/extobjc (1.5)
   - TSMessages (0.9.9):
     - HexColors
@@ -18,4 +18,4 @@ SPEC CHECKSUMS:
   Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
   TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
 
-COCOAPODS: 0.34.2
+COCOAPODS: 0.35.0
