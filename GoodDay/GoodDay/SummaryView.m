@@ -40,6 +40,15 @@
                      }];
 }
 
+- (void)clearView
+{
+    self.cityLabel.text = nil;
+    self.icon.image = nil;
+    self.conditionLabel.text = nil;
+    self.floatTemperatureLabel.text = nil;
+    self.otherConditionLabel.text = nil;
+    self.currentTemperatureLabel.text = nil;
+}
 
 
 /*

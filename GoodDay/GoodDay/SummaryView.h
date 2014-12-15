@@ -19,4 +19,6 @@
 
 - (void)showWeatherWithAnimation:(BOOL)animation;
 
+- (void)clearView;
+
 @end

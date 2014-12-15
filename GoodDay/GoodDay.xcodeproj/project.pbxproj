@@ -25,6 +25,8 @@
 		CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */; };
 		CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B611A3C1D47002B9A00 /* DailyWeatherViewModel.m */; };
 		CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B641A3DD063002B9A00 /* CityViewController.m */; };
+		CEF08B6F1A3F34DF002B9A00 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B6E1A3F34DF002B9A00 /* RootViewController.m */; };
+		CEF08B721A3F386F002B9A00 /* RootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B711A3F386F002B9A00 /* RootCell.m */; };
 		CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,10 @@
 		CEF08B611A3C1D47002B9A00 /* DailyWeatherViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyWeatherViewModel.m; sourceTree = "<group>"; };
 		CEF08B631A3DD063002B9A00 /* CityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityViewController.h; sourceTree = "<group>"; };
 		CEF08B641A3DD063002B9A00 /* CityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityViewController.m; sourceTree = "<group>"; };
+		CEF08B6D1A3F34DF002B9A00 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		CEF08B6E1A3F34DF002B9A00 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		CEF08B701A3F386F002B9A00 /* RootCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootCell.h; sourceTree = "<group>"; };
+		CEF08B711A3F386F002B9A00 /* RootCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootCell.m; sourceTree = "<group>"; };
 		CEF313671A39A05A007EADE7 /* CurrentWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherViewModel.h; sourceTree = "<group>"; };
 		CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +133,8 @@
 				CE5F84581A37EE1600545EA4 /* SummaryView.xib */,
 				CE5F845A1A37EF1F00545EA4 /* SummaryView.h */,
 				CE5F845B1A37EF1F00545EA4 /* SummaryView.m */,
+				CEF08B701A3F386F002B9A00 /* RootCell.h */,
+				CEF08B711A3F386F002B9A00 /* RootCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -217,6 +225,8 @@
 				CE9F363B1A36E4BE007D99FF /* ViewController.m */,
 				CEF08B631A3DD063002B9A00 /* CityViewController.h */,
 				CEF08B641A3DD063002B9A00 /* CityViewController.m */,
+				CEF08B6D1A3F34DF002B9A00 /* RootViewController.h */,
+				CEF08B6E1A3F34DF002B9A00 /* RootViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -373,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9F363C1A36E4BE007D99FF /* ViewController.m in Sources */,
+				CEF08B721A3F386F002B9A00 /* RootCell.m in Sources */,
 				CE5F845C1A37EF1F00545EA4 /* SummaryView.m in Sources */,
 				CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */,
 				CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */,
@@ -382,6 +393,7 @@
 				CE4AFD6E1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m in Sources */,
 				CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */,
 				CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */,
+				CEF08B6F1A3F34DF002B9A00 /* RootViewController.m in Sources */,
 				CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */,
 				CE5F84601A37FB8C00545EA4 /* WeatherInterface.m in Sources */,
 			);
