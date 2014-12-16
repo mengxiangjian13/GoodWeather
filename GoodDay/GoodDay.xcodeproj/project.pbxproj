@@ -17,7 +17,6 @@
 		CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */; };
 		CE9F36361A36E4BE007D99FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F36351A36E4BE007D99FF /* main.m */; };
 		CE9F36391A36E4BE007D99FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F36381A36E4BE007D99FF /* AppDelegate.m */; };
-		CE9F363C1A36E4BE007D99FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F363B1A36E4BE007D99FF /* ViewController.m */; };
 		CE9F363F1A36E4BE007D99FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9F363D1A36E4BE007D99FF /* Main.storyboard */; };
 		CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36401A36E4BE007D99FF /* Images.xcassets */; };
 		CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */; };
@@ -61,8 +60,6 @@
 		CE9F36351A36E4BE007D99FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE9F36371A36E4BE007D99FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE9F36381A36E4BE007D99FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CE9F363A1A36E4BE007D99FF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CE9F363B1A36E4BE007D99FF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CE9F363E1A36E4BE007D99FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE9F36401A36E4BE007D99FF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE9F36431A36E4BE007D99FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -221,8 +218,6 @@
 		CEF08B661A3DD079002B9A00 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				CE9F363A1A36E4BE007D99FF /* ViewController.h */,
-				CE9F363B1A36E4BE007D99FF /* ViewController.m */,
 				CEF08B631A3DD063002B9A00 /* CityViewController.h */,
 				CEF08B641A3DD063002B9A00 /* CityViewController.m */,
 				CEF08B6D1A3F34DF002B9A00 /* RootViewController.h */,
@@ -382,7 +377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9F363C1A36E4BE007D99FF /* ViewController.m in Sources */,
 				CEF08B721A3F386F002B9A00 /* RootCell.m in Sources */,
 				CE5F845C1A37EF1F00545EA4 /* SummaryView.m in Sources */,
 				CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */,
