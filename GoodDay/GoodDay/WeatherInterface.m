@@ -41,7 +41,8 @@
                       success:(SuccessBlock)success
                       failure:(FailureBlock)failure
 {
-    NSURL *sessionUrl = [NSURL URLWithString:url];
+    NSString *absoluteUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *sessionUrl = [NSURL URLWithString:absoluteUrl];
     if (session && sessionUrl)
     {
         NSURLSessionTask *task = [session dataTaskWithURL:sessionUrl
