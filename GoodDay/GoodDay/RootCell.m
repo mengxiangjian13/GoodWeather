@@ -93,6 +93,7 @@
 {
     SummaryView *summaryView = (SummaryView *)weatherTableView.tableHeaderView;
     [summaryView clearView];
+    weatherTableView.contentOffset = CGPointZero;
 }
 
 #pragma mark -
