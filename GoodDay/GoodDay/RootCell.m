@@ -87,10 +87,37 @@
             [summaryView showWeatherWithAnimation:!isCache];
         }];
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rootCell:hourlyForecastDataWithShowBlock:)])
+    {
+        [self.delegate rootCell:self hourlyForecastDataWithShowBlock:^(NSArray *viewModelArray, BOOL isCache) {
+            if (viewModelArray && [viewModelArray isKindOfClass:[NSArray class]])
+            {
+                [hourForecastArray addObjectsFromArray:viewModelArray];
+                [weatherTableView reloadData];
+            }
+        }];
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rootCell:dailyForecastWeatherDataWithShowBlock:)])
+    {
+        [self.delegate rootCell:self dailyForecastWeatherDataWithShowBlock:^(NSArray *viewModelArray, BOOL isCache) {
+            if (viewModelArray && [viewModelArray isKindOfClass:[NSArray class]])
+            {
+                [dailyForecastArray addObjectsFromArray:viewModelArray];
+                [weatherTableView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)clearView
 {
+    // clear Data
+    [hourForecastArray removeAllObjects];
+    [dailyForecastArray removeAllObjects];
+    
+    // clear UI
     SummaryView *summaryView = (SummaryView *)weatherTableView.tableHeaderView;
     [summaryView clearView];
     weatherTableView.contentOffset = CGPointZero;

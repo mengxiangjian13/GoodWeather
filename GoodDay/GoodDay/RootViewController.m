@@ -14,7 +14,11 @@
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate>
 {
     NSArray *citys;
+    
+    // data container
     NSMutableDictionary *currentWeatherDict;
+    NSMutableDictionary *hourlyForecastDict;
+    NSMutableDictionary *dailyForecastDict;
 }
 
 @end
@@ -25,14 +29,16 @@
 {
     [super viewDidLoad];
     
+    // set TSMessage default viewcontroller
+    [TSMessage setDefaultViewController:self];
+    
     //fade data
     citys = @[@"beijing",@"tianjin",@"shanghai",@"chongqing",@"guangzhou",@"shijianzhuang"];
 
+    // data container initialize
     currentWeatherDict = [[NSMutableDictionary alloc] init];
-    for (NSString *city in citys)
-    {
-        [currentWeatherDict setObject:[NSNull null] forKey:city];
-    }
+    hourlyForecastDict = [[NSMutableDictionary alloc] init];
+    dailyForecastDict = [[NSMutableDictionary alloc] init];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = self.view.bounds.size;
@@ -57,7 +63,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [currentWeatherDict count];
+    return [citys count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -76,9 +82,9 @@
 {
     NSInteger index = cell.currentIndex;
     NSString *city = citys[index];
-    if ([currentWeatherDict objectForKey:city] != [NSNull null])
+    if (currentWeatherDict[city])
     {
-        CurrentWeatherViewModel *weather = [currentWeatherDict objectForKey:city];
+        CurrentWeatherViewModel *weather = currentWeatherDict[city];
         block(weather,YES);
         return;
     }
@@ -99,10 +105,79 @@
                                                                }
                                                            }
                                                        } failure:^(NSError *error) {
-                                                           [TSMessage showNotificationWithTitle:@"更新失败"
-                                                                                       subtitle:@"请检查网络状况是否畅通"
-                                                                                           type:TSMessageNotificationTypeError];
+                                                           [self showNetErrorView];
                                                        }];
+}
+
+- (void)rootCell:(RootCell *)cell hourlyForecastDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block
+{
+    NSInteger index = cell.currentIndex;
+    NSString *city = citys[index];
+    if (hourlyForecastDict[city])
+    {
+        NSArray *viewModelArray = hourlyForecastDict[city];
+        block(viewModelArray,YES);
+        return;
+    }
+    
+    [[WeatherInterface sharedInterface] hourlyforecastWithCity:city
+                                                     hourCount:8
+                                                       success:^(id model) {
+                                                           if ([model isKindOfClass:[NSArray class]])
+                                                           {
+                                                               NSArray *viewModelArray = (NSArray *)model;
+                                                               [hourlyForecastDict setObject:viewModelArray forKey:city];
+                                                               // 防止因为重用导致数据不一致
+                                                               if (index == cell.currentIndex)
+                                                               {
+                                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                                       block(viewModelArray,NO);
+                                                                   });
+                                                               }
+                                                           }
+                                                       } failure:^(NSError *error) {
+                                                           [self showNetErrorView];
+                                                       }];
+}
+
+- (void)rootCell:(RootCell *)cell dailyForecastWeatherDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block
+{
+    NSInteger index = cell.currentIndex;
+    NSString *city = citys[index];
+    if (dailyForecastDict[city])
+    {
+        NSArray *viewModelArray = dailyForecastDict[city];
+        block(viewModelArray,YES);
+    }
+    
+    [[WeatherInterface sharedInterface] dailyforecastWithCity:city
+                                                     dayCount:7
+                                                      success:^(id model) {
+                                                          if ([model isKindOfClass:[NSArray class]])
+                                                          {
+                                                              NSArray *viewModelArray = (NSArray *)model;
+                                                              [dailyForecastDict setObject:viewModelArray forKey:city];
+                                                              // 防止因为重用导致数据不一致
+                                                              if (index == cell.currentIndex)
+                                                              {
+                                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                                      block(viewModelArray,NO);
+                                                                  });
+                                                              }
+                                                          }
+                                                      } failure:^(NSError *error) {
+                                                          [self showNetErrorView];
+                                                      }];
+}
+
+#pragma mark -
+#pragma mark Private Method
+
+- (void)showNetErrorView
+{
+    [TSMessage showNotificationWithTitle:@"更新失败"
+                                subtitle:@"请检查网络状况是否畅通"
+                                    type:TSMessageNotificationTypeError];
 }
 
 #pragma statusbar
