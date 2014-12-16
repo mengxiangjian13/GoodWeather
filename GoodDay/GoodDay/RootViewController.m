@@ -32,6 +32,11 @@
     // set TSMessage default viewcontroller
     [TSMessage setDefaultViewController:self];
     
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    backgroundImageView.image = [UIImage imageNamed:@"Images/bg"];
+    backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:backgroundImageView];
+    
     //fade data
     citys = @[@"beijing",@"tianjin",@"shanghai",@"chongqing",@"guangzhou",@"shijianzhuang"];
 
@@ -48,6 +53,7 @@
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
                                                           collectionViewLayout:flowLayout];
+    collectionView.backgroundColor = [UIColor clearColor];
     collectionView.dataSource = self;
     collectionView.delegate = self;
     

@@ -31,16 +31,14 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        self.backgroundColor = [UIColor clearColor];
+        self.contentView.backgroundColor = [UIColor clearColor];
+        
         // initialize datasource container
         hourForecastArray = [[NSMutableArray alloc] init];
         dailyForecastArray = [[NSMutableArray alloc] init];
         
         // main UI
-        UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        backgroundImageView.image = [UIImage imageNamed:@"Images/bg"];
-        backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
-        [self addSubview:backgroundImageView];
-        
         blurImageView = [[UIImageView alloc] initWithFrame:self.bounds];
         blurImageView.contentMode = UIViewContentModeScaleAspectFill;
         blurImageView.alpha = 0.0;
