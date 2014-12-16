@@ -7,13 +7,11 @@
 //
 
 #import "RootCell.h"
-#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "SummaryView.h"
 
 
 @interface RootCell () <UITableViewDataSource,UITableViewDelegate>
 {
-    UIImageView *blurImageView;
     UITableView *weatherTableView;
     
     // hourly forecast datasource
@@ -39,12 +37,6 @@
         dailyForecastArray = [[NSMutableArray alloc] init];
         
         // main UI
-        blurImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        blurImageView.contentMode = UIViewContentModeScaleAspectFill;
-        blurImageView.alpha = 0.0;
-        [blurImageView setImageToBlur:[UIImage imageNamed:@"Images/bg"] blurRadius:10.0 completionBlock:nil];
-        [self addSubview:blurImageView];
-        
         weatherTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         weatherTableView.delegate = self;
         weatherTableView.dataSource = self;
@@ -206,9 +198,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat offset = MAX(scrollView.contentOffset.y, 0);
-    CGFloat alpha = offset / self.bounds.size.height;
-    blurImageView.alpha = MIN(alpha, 1.0);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rootCell:weatherTableViewDidScrollWithContentOffset:)])
+    {
+        [self.delegate rootCell:self weatherTableViewDidScrollWithContentOffset:scrollView.contentOffset];
+    }
 }
 
 @end

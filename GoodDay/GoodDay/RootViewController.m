@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "RootCell.h"
 #import <TSMessages/TSMessage.h>
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "WeatherInterface.h"
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate>
@@ -19,6 +20,14 @@
     NSMutableDictionary *currentWeatherDict;
     NSMutableDictionary *hourlyForecastDict;
     NSMutableDictionary *dailyForecastDict;
+    
+    // backgroundImageView
+    UIImageView *backgroundImageView;
+    // blur
+    UIImageView *blurImageView;
+    
+    // current backgroundImage
+    NSString *currentImageName;
 }
 
 @end
@@ -32,10 +41,20 @@
     // set TSMessage default viewcontroller
     [TSMessage setDefaultViewController:self];
     
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    backgroundImageView.image = [UIImage imageNamed:@"Images/bg"];
+    currentImageName = @"bg/bg";
+    
+    backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    backgroundImageView.image = [UIImage imageNamed:currentImageName];
     backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:backgroundImageView];
+    
+    blurImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    blurImageView.contentMode = UIViewContentModeScaleAspectFill;
+    blurImageView.alpha = 0.0;
+    [blurImageView setImageToBlur:[UIImage imageNamed:currentImageName]
+                       blurRadius:10.0
+                  completionBlock:nil];
+    [self.view addSubview:blurImageView];
     
     //fade data
     citys = @[@"beijing",@"tianjin",@"shanghai",@"chongqing",@"guangzhou",@"shijianzhuang"];
@@ -80,6 +99,42 @@
     [cell showWeatherForecastWithIndex:indexPath.item city:citys[indexPath.item]];
     
     return cell;
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pageWidth = self.view.bounds.size.width;
+    NSInteger page = (NSInteger)ceil((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth);
+    
+    if (page % 2 == 0)
+    {
+        if (![currentImageName isEqualToString:@"bg/bg"])
+        {
+            currentImageName = @"bg/bg";
+            backgroundImageView.image = [UIImage imageNamed:currentImageName];
+            [blurImageView setImageToBlur:[UIImage imageNamed:currentImageName]
+                               blurRadius:10
+                          completionBlock:nil];
+        }
+    }
+    else
+    {
+        if (![currentImageName isEqualToString:@"bg/night.jpg"])
+        {
+            currentImageName = @"bg/night.jpg";
+            backgroundImageView.image = [UIImage imageNamed:@"bg/night.jpg"];
+            [blurImageView setImageToBlur:[UIImage imageNamed:@"bg/night.jpg"]
+                               blurRadius:10
+                          completionBlock:nil];
+        }
+    }
+    
+    NSInteger realPage = (NSInteger)floor(scrollView.contentOffset.x / pageWidth);
+    CGFloat line = realPage * pageWidth + pageWidth / 2.0;
+    CGFloat alpha = fabs(scrollView.contentOffset.x - line) / (pageWidth / 2.0);
+    blurImageView.alpha = 1.0 - alpha;
 }
 
 #pragma mark -
@@ -154,6 +209,7 @@
     {
         NSArray *viewModelArray = dailyForecastDict[city];
         block(viewModelArray,YES);
+        return;
     }
     
     [[WeatherInterface sharedInterface] dailyforecastWithCity:city
@@ -175,6 +231,14 @@
                                                           [self showNetErrorView];
                                                       }];
 }
+
+- (void)rootCell:(RootCell *)cell weatherTableViewDidScrollWithContentOffset:(CGPoint)contentOffset
+{
+    CGFloat offset = MAX(contentOffset.y, 0);
+    CGFloat alpha = offset / self.view.bounds.size.height;
+    blurImageView.alpha = MIN(alpha, 1.0);
+}
+
 
 #pragma mark -
 #pragma mark Private Method

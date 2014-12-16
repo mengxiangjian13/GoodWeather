@@ -27,5 +27,7 @@
 - (void)rootCell:(RootCell *)cell currentWeatherDataWithShowBlock:(void(^)(CurrentWeatherViewModel *model,BOOL isCache))block;
 - (void)rootCell:(RootCell *)cell hourlyForecastDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block;
 - (void)rootCell:(RootCell *)cell dailyForecastWeatherDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block;
+@optional
+- (void)rootCell:(RootCell *)cell weatherTableViewDidScrollWithContentOffset:(CGPoint)offset;
 
 @end

@@ -26,6 +26,7 @@
 		CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B641A3DD063002B9A00 /* CityViewController.m */; };
 		CEF08B6F1A3F34DF002B9A00 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B6E1A3F34DF002B9A00 /* RootViewController.m */; };
 		CEF08B721A3F386F002B9A00 /* RootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B711A3F386F002B9A00 /* RootCell.m */; };
+		CEF08B741A40872C002B9A00 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = CEF08B731A40872C002B9A00 /* bg */; };
 		CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		CEF08B6E1A3F34DF002B9A00 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		CEF08B701A3F386F002B9A00 /* RootCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootCell.h; sourceTree = "<group>"; };
 		CEF08B711A3F386F002B9A00 /* RootCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootCell.m; sourceTree = "<group>"; };
+		CEF08B731A40872C002B9A00 /* bg */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bg; sourceTree = "<group>"; };
 		CEF313671A39A05A007EADE7 /* CurrentWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherViewModel.h; sourceTree = "<group>"; };
 		CEF313681A39A05A007EADE7 /* CurrentWeatherViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 		CE5F84541A37E85F00545EA4 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEF08B731A40872C002B9A00 /* bg */,
 				CE5F84551A37E87500545EA4 /* Images */,
 			);
 			name = resources;
@@ -327,6 +330,7 @@
 				CE9F363F1A36E4BE007D99FF /* Main.storyboard in Resources */,
 				CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */,
 				CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */,
+				CEF08B741A40872C002B9A00 /* bg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
