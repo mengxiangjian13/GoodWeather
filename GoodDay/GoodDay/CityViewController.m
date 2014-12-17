@@ -7,6 +7,7 @@
 //
 
 #import "CityViewController.h"
+#import "FindCityViewController.h"
 
 @interface CityViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -176,6 +177,16 @@
 - (void)addCity:(id)sender
 {
     NSLog(@"add city");
+    FindCityViewController *findVC = [FindCityViewController new];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        UISearchController *searchVC = [[UISearchController alloc] initWithSearchResultsController:findVC];
+        searchVC.searchResultsUpdater = findVC;
+        searchVC.hidesNavigationBarDuringPresentation = NO;
+        [self.navigationController presentViewController:searchVC
+                                                animated:YES
+                                              completion:nil];
+    }
 }
 
 @end
