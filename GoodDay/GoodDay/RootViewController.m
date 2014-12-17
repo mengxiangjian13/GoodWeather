@@ -11,6 +11,7 @@
 #import <TSMessages/TSMessage.h>
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "WeatherInterface.h"
+#import "CityViewController.h"
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate>
 {
@@ -25,9 +26,11 @@
     UIImageView *backgroundImageView;
     // blur
     UIImageView *blurImageView;
+    // show citylist button
+    UIButton *cityListButton;
     
-    // current backgroundImage
-    NSString *currentImageName;
+    // current page
+    NSInteger showingPage;
 }
 
 @end
@@ -41,17 +44,17 @@
     // set TSMessage default viewcontroller
     [TSMessage setDefaultViewController:self];
     
-    currentImageName = @"bg/bg";
+    showingPage = 0;
     
     backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    backgroundImageView.image = [UIImage imageNamed:currentImageName];
+    backgroundImageView.image = [UIImage imageNamed:@"bg/bg"];
     backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:backgroundImageView];
     
     blurImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     blurImageView.contentMode = UIViewContentModeScaleAspectFill;
     blurImageView.alpha = 0.0;
-    [blurImageView setImageToBlur:[UIImage imageNamed:currentImageName]
+    [blurImageView setImageToBlur:[UIImage imageNamed:@"bg/bg"]
                        blurRadius:10.0
                   completionBlock:nil];
     [self.view addSubview:blurImageView];
@@ -83,6 +86,12 @@
        forCellWithReuseIdentifier:@"cell"];
     
     [self.view addSubview:collectionView];
+    
+    cityListButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [cityListButton setTitle:@"城市" forState:UIControlStateNormal];
+    cityListButton.frame = CGRectMake(self.view.bounds.size.width - 50, self.view.bounds.size.height - 44 , 44, 44);
+    [cityListButton addTarget:self action:@selector(showCityList:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cityListButton];
 }
 
 
@@ -108,29 +117,25 @@
     CGFloat pageWidth = self.view.bounds.size.width;
     NSInteger page = (NSInteger)ceil((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth);
     
-    if (page % 2 == 0)
+    if (showingPage != page)
     {
-        if (![currentImageName isEqualToString:@"bg/bg"])
+        showingPage = page;
+        if (page % 2 == 0)
         {
-            currentImageName = @"bg/bg";
-            backgroundImageView.image = [UIImage imageNamed:currentImageName];
-            [blurImageView setImageToBlur:[UIImage imageNamed:currentImageName]
+            backgroundImageView.image = [UIImage imageNamed:@"bg/bg"];
+            [blurImageView setImageToBlur:[UIImage imageNamed:@"bg/bg"]
                                blurRadius:10
                           completionBlock:nil];
         }
-    }
-    else
-    {
-        if (![currentImageName isEqualToString:@"bg/night.jpg"])
+        else
         {
-            currentImageName = @"bg/night.jpg";
             backgroundImageView.image = [UIImage imageNamed:@"bg/night.jpg"];
             [blurImageView setImageToBlur:[UIImage imageNamed:@"bg/night.jpg"]
                                blurRadius:10
                           completionBlock:nil];
         }
     }
-    
+
     NSInteger realPage = (NSInteger)floor(scrollView.contentOffset.x / pageWidth);
     CGFloat line = realPage * pageWidth + pageWidth / 2.0;
     CGFloat alpha = fabs(scrollView.contentOffset.x - line) / (pageWidth / 2.0);
@@ -237,11 +242,23 @@
     CGFloat offset = MAX(contentOffset.y, 0);
     CGFloat alpha = offset / self.view.bounds.size.height;
     blurImageView.alpha = MIN(alpha, 1.0);
+    
+    CGFloat translate = MIN(contentOffset.y, 44.0);
+    translate = MAX(translate, 0);
+    cityListButton.alpha = 1 -  translate / 44.0;
+    cityListButton.transform = CGAffineTransformMakeTranslation(0, translate);
 }
-
 
 #pragma mark -
 #pragma mark Private Method
+
+- (void)showCityList:(id)sender
+{
+    NSLog(@"show citys");
+    CityViewController *cityListVC = [[CityViewController alloc] initWithCities:citys];
+    UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:cityListVC];
+    [self presentViewController:naviController animated:YES completion:nil];
+}
 
 - (void)showNetErrorView
 {

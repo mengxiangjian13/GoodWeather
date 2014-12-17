@@ -10,4 +10,6 @@
 
 @interface CityViewController : UIViewController
 
+- (instancetype)initWithCities:(NSArray *)cities;
+
 @end

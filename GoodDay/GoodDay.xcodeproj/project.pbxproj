@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7189AE0B49AE4B437E1DD952 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C756F028BA0CBF1399D82C2 /* libPods.a */; };
+		CE25996E1A41753800B62683 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE25996D1A41753800B62683 /* CityModel.m */; };
 		CE4AFD6B1A3AFAD4001C25F6 /* HourlyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AFD6A1A3AFAD4001C25F6 /* HourlyWeatherModel.m */; };
 		CE4AFD6E1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AFD6D1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m */; };
 		CE5F84561A37E87500545EA4 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = CE5F84551A37E87500545EA4 /* Images */; };
@@ -44,6 +45,8 @@
 		2CFE29807875302AE1A524D9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		53E7036F6CDE93137317D662 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7C756F028BA0CBF1399D82C2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE25996C1A41753800B62683 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		CE25996D1A41753800B62683 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		CE4AFD691A3AFAD4001C25F6 /* HourlyWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HourlyWeatherModel.h; sourceTree = "<group>"; };
 		CE4AFD6A1A3AFAD4001C25F6 /* HourlyWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HourlyWeatherModel.m; sourceTree = "<group>"; };
 		CE4AFD6C1A3AFCA0001C25F6 /* HourlyWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HourlyWeatherViewModel.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				CE4AFD6A1A3AFAD4001C25F6 /* HourlyWeatherModel.m */,
 				CEF08B5D1A3C1C47002B9A00 /* DailyWeatherModel.h */,
 				CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */,
+				CE25996C1A41753800B62683 /* CityModel.h */,
+				CE25996D1A41753800B62683 /* CityModel.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				CE5F845C1A37EF1F00545EA4 /* SummaryView.m in Sources */,
 				CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */,
 				CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */,
+				CE25996E1A41753800B62683 /* CityModel.m in Sources */,
 				CE4AFD6B1A3AFAD4001C25F6 /* HourlyWeatherModel.m in Sources */,
 				CE9F36391A36E4BE007D99FF /* AppDelegate.m in Sources */,
 				CE9F36361A36E4BE007D99FF /* main.m in Sources */,
