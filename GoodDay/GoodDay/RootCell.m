@@ -53,9 +53,11 @@
 
 - (void)showCurrentWeather
 {
-    SummaryView *summaryView = [[[NSBundle mainBundle] loadNibNamed:@"SummaryView" owner:self options:nil] lastObject];
+    SummaryView *summaryView = nil;
 #if ADBANNER==1
     summaryView = [[[NSBundle mainBundle] loadNibNamed:@"SummaryViewAD" owner:self options:nil] lastObject];
+#else
+    summaryView = [[[NSBundle mainBundle] loadNibNamed:@"SummaryView" owner:self options:nil] lastObject];
 #endif
     summaryView.frame = self.bounds;
     weatherTableView.tableHeaderView = summaryView;
