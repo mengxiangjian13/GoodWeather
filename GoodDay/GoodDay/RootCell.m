@@ -8,6 +8,7 @@
 
 #import "RootCell.h"
 #import "SummaryView.h"
+#import "LoadingHud.h"
 
 
 @interface RootCell () <UITableViewDataSource,UITableViewDelegate>
@@ -18,6 +19,8 @@
     NSMutableArray *hourForecastArray;
     // daily forecast datasource
     NSMutableArray *dailyForecastArray;
+    // loading hud
+    LoadingHud *loadingHud;
 }
 
 @end
@@ -116,6 +119,18 @@
     SummaryView *summaryView = (SummaryView *)weatherTableView.tableHeaderView;
     [summaryView clearView];
     weatherTableView.contentOffset = CGPointZero;
+    
+    [self hideLoadingView];
+}
+
+- (void)showLoadingView
+{
+    loadingHud = [LoadingHud showLoadingHudInView:self];
+}
+
+- (void)hideLoadingView
+{
+    [loadingHud hideLoadingHud];
 }
 
 #pragma mark -

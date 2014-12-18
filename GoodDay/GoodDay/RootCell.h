@@ -19,6 +19,8 @@
 @property (nonatomic,weak) id <RootCellDelegate> delegate;
 
 - (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city;
+- (void)showLoadingView;
+- (void)hideLoadingView;
 
 @end
 

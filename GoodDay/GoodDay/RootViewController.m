@@ -182,6 +182,8 @@
         return;
     }
     
+    [cell showLoadingView];
+    
     [[WeatherInterface sharedInterface] currentWeatherWithCity:city
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[CurrentWeatherViewModel class]])
@@ -193,12 +195,14 @@
                                                                if (index == cell.currentIndex)
                                                                {
                                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                                       [cell hideLoadingView];
                                                                        block(weather,NO);
                                                                    });
                                                                }
                                                            }
                                                        } failure:^(NSError *error) {
                                                            [self showNetErrorView];
+                                                           [cell hideLoadingView];
                                                        }];
 }
 
