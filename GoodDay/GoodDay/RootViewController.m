@@ -94,9 +94,9 @@
     
     [self.view addSubview:collectionView];
     
-    cityListButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [cityListButton setTitle:@"城市" forState:UIControlStateNormal];
-    cityListButton.frame = CGRectMake(self.view.bounds.size.width - 50, 20, 44, 44);
+    cityListButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cityListButton setImage:[UIImage imageNamed:@"Images/menu"] forState:UIControlStateNormal];
+    cityListButton.frame = CGRectMake(self.view.bounds.size.width - 60, 15, 44, 44);
     [cityListButton addTarget:self action:@selector(showCityList:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cityListButton];
 
