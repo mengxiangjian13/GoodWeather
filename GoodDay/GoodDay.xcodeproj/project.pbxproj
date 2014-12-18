@@ -17,6 +17,15 @@
 		CE5F845C1A37EF1F00545EA4 /* SummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F845B1A37EF1F00545EA4 /* SummaryView.m */; };
 		CE5F84601A37FB8C00545EA4 /* WeatherInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F845F1A37FB8C00545EA4 /* WeatherInterface.m */; };
 		CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */; };
+		CE8F45701A4288FD00183FD3 /* ChanceAdRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */; };
+		CE8F45711A4288FD00183FD3 /* libChanceAd_NoAppZone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */; };
+		CE8F45731A42895C00183FD3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45721A42895C00183FD3 /* AdSupport.framework */; };
+		CE8F45751A42896400183FD3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45741A42896400183FD3 /* StoreKit.framework */; };
+		CE8F45771A42896C00183FD3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45761A42896C00183FD3 /* Security.framework */; };
+		CE8F45791A42898300183FD3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45781A42898300183FD3 /* SystemConfiguration.framework */; };
+		CE8F457B1A42898A00183FD3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F457A1A42898A00183FD3 /* CoreTelephony.framework */; };
+		CE8F457D1A42899500183FD3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F457C1A42899500183FD3 /* libz.dylib */; };
+		CE8F457F1A42966E00183FD3 /* SummaryViewAD.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F457E1A42966E00183FD3 /* SummaryViewAD.xib */; };
 		CE9F36361A36E4BE007D99FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F36351A36E4BE007D99FF /* main.m */; };
 		CE9F36391A36E4BE007D99FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F36381A36E4BE007D99FF /* AppDelegate.m */; };
 		CE9F363F1A36E4BE007D99FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9F363D1A36E4BE007D99FF /* Main.storyboard */; };
@@ -62,6 +71,22 @@
 		CE5F845F1A37FB8C00545EA4 /* WeatherInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInterface.m; sourceTree = "<group>"; };
 		CE5F84611A3800CA00545EA4 /* CurrentWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherModel.h; sourceTree = "<group>"; };
 		CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherModel.m; sourceTree = "<group>"; };
+		CE8F45671A4288FD00183FD3 /* ChanceAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanceAd.h; sourceTree = "<group>"; };
+		CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ChanceAdRes.bundle; sourceTree = "<group>"; };
+		CE8F45691A4288FD00183FD3 /* CSADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSADRequest.h; sourceTree = "<group>"; };
+		CE8F456A1A4288FD00183FD3 /* CSBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSBannerView.h; sourceTree = "<group>"; };
+		CE8F456B1A4288FD00183FD3 /* CSInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSInterstitial.h; sourceTree = "<group>"; };
+		CE8F456C1A4288FD00183FD3 /* CSMoreGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMoreGame.h; sourceTree = "<group>"; };
+		CE8F456D1A4288FD00183FD3 /* CSNativeMoreGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNativeMoreGame.h; sourceTree = "<group>"; };
+		CE8F456E1A4288FD00183FD3 /* CSRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRequestError.h; sourceTree = "<group>"; };
+		CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libChanceAd_NoAppZone.a; sourceTree = "<group>"; };
+		CE8F45721A42895C00183FD3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CE8F45741A42896400183FD3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CE8F45761A42896C00183FD3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CE8F45781A42898300183FD3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CE8F457A1A42898A00183FD3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CE8F457C1A42899500183FD3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CE8F457E1A42966E00183FD3 /* SummaryViewAD.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SummaryViewAD.xib; sourceTree = "<group>"; };
 		CE9F36301A36E4BE007D99FF /* GoodDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9F36341A36E4BE007D99FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9F36351A36E4BE007D99FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,7 +118,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8F457D1A42899500183FD3 /* libz.dylib in Frameworks */,
+				CE8F457B1A42898A00183FD3 /* CoreTelephony.framework in Frameworks */,
+				CE8F45791A42898300183FD3 /* SystemConfiguration.framework in Frameworks */,
+				CE8F45771A42896C00183FD3 /* Security.framework in Frameworks */,
+				CE8F45751A42896400183FD3 /* StoreKit.framework in Frameworks */,
+				CE8F45731A42895C00183FD3 /* AdSupport.framework in Frameworks */,
 				7189AE0B49AE4B437E1DD952 /* libPods.a in Frameworks */,
+				CE8F45711A4288FD00183FD3 /* libChanceAd_NoAppZone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +151,12 @@
 		CE27811BA3CCDAAA52D98C02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F457C1A42899500183FD3 /* libz.dylib */,
+				CE8F457A1A42898A00183FD3 /* CoreTelephony.framework */,
+				CE8F45781A42898300183FD3 /* SystemConfiguration.framework */,
+				CE8F45761A42896C00183FD3 /* Security.framework */,
+				CE8F45741A42896400183FD3 /* StoreKit.framework */,
+				CE8F45721A42895C00183FD3 /* AdSupport.framework */,
 				7C756F028BA0CBF1399D82C2 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -136,6 +174,7 @@
 		CE5F84571A37EDF400545EA4 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F457E1A42966E00183FD3 /* SummaryViewAD.xib */,
 				CE5F84581A37EE1600545EA4 /* SummaryView.xib */,
 				CE5F845A1A37EF1F00545EA4 /* SummaryView.h */,
 				CE5F845B1A37EF1F00545EA4 /* SummaryView.m */,
@@ -160,6 +199,30 @@
 				CE25996D1A41753800B62683 /* CityModel.m */,
 			);
 			name = data;
+			sourceTree = "<group>";
+		};
+		CE8F45651A4288E500183FD3 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F45661A4288FD00183FD3 /* cocoachinaAD */,
+			);
+			name = Vendors;
+			sourceTree = "<group>";
+		};
+		CE8F45661A4288FD00183FD3 /* cocoachinaAD */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F45671A4288FD00183FD3 /* ChanceAd.h */,
+				CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */,
+				CE8F45691A4288FD00183FD3 /* CSADRequest.h */,
+				CE8F456A1A4288FD00183FD3 /* CSBannerView.h */,
+				CE8F456B1A4288FD00183FD3 /* CSInterstitial.h */,
+				CE8F456C1A4288FD00183FD3 /* CSMoreGame.h */,
+				CE8F456D1A4288FD00183FD3 /* CSNativeMoreGame.h */,
+				CE8F456E1A4288FD00183FD3 /* CSRequestError.h */,
+				CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */,
+			);
+			path = cocoachinaAD;
 			sourceTree = "<group>";
 		};
 		CE9F36271A36E4BE007D99FF = {
@@ -190,6 +253,7 @@
 				CE9F363D1A36E4BE007D99FF /* Main.storyboard */,
 				CE9F36401A36E4BE007D99FF /* Images.xcassets */,
 				CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */,
+				CE8F45651A4288E500183FD3 /* Vendors */,
 				CEF08B661A3DD079002B9A00 /* ViewController */,
 				CEF313661A39A030007EADE7 /* ViewModel */,
 				CE5F845D1A37FB3200545EA4 /* data */,
@@ -335,9 +399,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8F457F1A42966E00183FD3 /* SummaryViewAD.xib in Resources */,
 				CE5F84591A37EE1600545EA4 /* SummaryView.xib in Resources */,
 				CE5F84561A37E87500545EA4 /* Images in Resources */,
 				CE9F363F1A36E4BE007D99FF /* Main.storyboard in Resources */,
+				CE8F45701A4288FD00183FD3 /* ChanceAdRes.bundle in Resources */,
 				CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */,
 				CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */,
 				CEF08B741A40872C002B9A00 /* bg in Resources */,
@@ -531,9 +597,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"ADBANNER=0",
+				);
 				INFOPLIST_FILE = GoodDay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoodDay/cocoachinaAD",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -547,9 +621,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"ADBANNER=0",
+				);
 				INFOPLIST_FILE = GoodDay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoodDay/cocoachinaAD",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

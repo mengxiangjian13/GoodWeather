@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ChanceAd.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+//    [ChanceAd startSession:@"888714720-448823-08B0-8AA0-192920C19"];
+    // 测试专用
+#if ADBANNER==1
+    [ChanceAd startSession:@"100032-4CE817-ABA2-5B48-14D009296720"];
+#endif
+    
     return YES;
 }
 

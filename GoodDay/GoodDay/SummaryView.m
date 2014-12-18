@@ -21,7 +21,14 @@
         if ([obj isKindOfClass:[UIView class]] && obj != self.cityLabel)
         {
             UIView *view = (UIView *)obj;
-            view.transform = CGAffineTransformMakeTranslation(0, 300);
+            if (ADBANNER == 1)
+            {
+                view.transform = CGAffineTransformMakeTranslation(0, 350);
+            }
+            else
+            {
+                view.transform = CGAffineTransformMakeTranslation(0, 300);
+            }
             double delay = (NSTimeInterval)idx / 5.0;
             [self appearAnimationWithView:view delay:delay];
         }

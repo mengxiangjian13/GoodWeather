@@ -12,6 +12,7 @@
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "WeatherInterface.h"
 #import "CityViewController.h"
+#import "CSBannerView.h"
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate>
 {
@@ -31,6 +32,9 @@
     
     // current page
     NSInteger showingPage;
+    
+    // ad banner
+    CSBannerView *bannerView;
 }
 
 @end
@@ -89,9 +93,16 @@
     
     cityListButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [cityListButton setTitle:@"城市" forState:UIControlStateNormal];
-    cityListButton.frame = CGRectMake(self.view.bounds.size.width - 50, self.view.bounds.size.height - 44 , 44, 44);
+    cityListButton.frame = CGRectMake(self.view.bounds.size.width - 50, 20, 44, 44);
     [cityListButton addTarget:self action:@selector(showCityList:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cityListButton];
+
+#if ADBANNER==1
+    bannerView = [[CSBannerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 50, CSBannerSize_iPhone.width, CSBannerSize_iPhone.height)];
+    CSADRequest *adRequest = [CSADRequest requestWithRequestInterval:20.0f andDisplayTime:20.0f];
+    [bannerView loadRequest:adRequest];
+    [self.view addSubview:bannerView];
+#endif
 }
 
 
@@ -140,6 +151,19 @@
     CGFloat line = realPage * pageWidth + pageWidth / 2.0;
     CGFloat alpha = fabs(scrollView.contentOffset.x - line) / (pageWidth / 2.0);
     blurImageView.alpha = 1.0 - alpha;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    // move cityButton and adBanner to origin position
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         cityListButton.transform = CGAffineTransformIdentity;
+                         if (bannerView)
+                         {
+                             bannerView.transform = CGAffineTransformIdentity;
+                         }
+                     }];
 }
 
 #pragma mark -
@@ -243,10 +267,13 @@
     CGFloat alpha = offset / self.view.bounds.size.height;
     blurImageView.alpha = MIN(alpha, 1.0);
     
-    CGFloat translate = MIN(contentOffset.y, 44.0);
+    CGFloat translate = MIN(contentOffset.y, 50.0);
     translate = MAX(translate, 0);
-    cityListButton.alpha = 1 -  translate / 44.0;
-    cityListButton.transform = CGAffineTransformMakeTranslation(0, translate);
+    cityListButton.transform = CGAffineTransformMakeTranslation(0, - translate);
+    if (bannerView)
+    {
+        bannerView.transform = CGAffineTransformMakeTranslation(0, translate);
+    }
 }
 
 #pragma mark -
