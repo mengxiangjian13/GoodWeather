@@ -10,6 +10,7 @@
 #import "CurrentWeatherViewModel.h"
 #import "HourlyWeatherViewModel.h"
 #import "DailyWeatherViewModel.h"
+#import "CityModel.h"
 
 
 typedef void (^SuccessBlock)(id model);
@@ -33,4 +34,7 @@ typedef void (^FailureBlock)(NSError *error);
                     success:(SuccessBlock)success
                     failure:(FailureBlock)failure;
 
+- (void)findCityWithCityName:(NSString *)city
+                     success:(SuccessBlock)success
+                     failure:(FailureBlock)failure;
 @end

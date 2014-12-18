@@ -8,6 +8,7 @@
 
 #import "FindCityViewController.h"
 #import <UIImageView+LBBlurredImage.h>
+#import "WeatherInterface.h"
 
 @interface FindCityViewController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -15,6 +16,8 @@
     
     // UISearchBar
     UISearchBar *searchBar;
+    
+    UITableView *searchTableView;
 }
 @end
 
@@ -24,12 +27,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    resultCityArray = [[NSMutableArray alloc] initWithObjects:@"beijing",@"tianjin", nil];
+    resultCityArray = [[NSMutableArray alloc] init];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.view addSubview:tableView];
+    searchTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    searchTableView.delegate = self;
+    searchTableView.dataSource = self;
+    [self.view addSubview:searchTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +54,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    cell.textLabel.text = resultCityArray[indexPath.row];
+    CityModel *model = resultCityArray[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ , %@",model.customName,model.country];
     
     return cell;
 }
@@ -60,7 +64,7 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(findCityViewControllerDidFindCityWithCity:)])
     {
-        [self.delegate findCityViewControllerDidFindCityWithCity:resultCityArray[indexPath.row]];
+        [self.delegate findCityViewControllerDidFindCityWithCity:[resultCityArray[indexPath.row] customName]];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -76,10 +80,22 @@
 }
 
 // searchBar delegate method
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+- (void)searchBarTextDidEndEditing:(UISearchBar *)_searchBar
 {
     NSLog(@"开始find");
-    
+    [[WeatherInterface sharedInterface] findCityWithCityName:_searchBar.text
+                                                     success:^(id model) {
+                                                         if ([model isKindOfClass:[NSArray class]])
+                                                         {
+                                                             [resultCityArray removeAllObjects];
+                                                             [resultCityArray addObjectsFromArray:model];
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 [searchTableView reloadData];
+                                                             });
+                                                         }
+                                                     } failure:^(NSError *error) {
+                                                         ;
+                                                     }];
 }
 
 /*

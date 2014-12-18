@@ -194,5 +194,35 @@
                         }];
 }
 
+- (void)findCityWithCityName:(NSString *)city
+                     success:(SuccessBlock)success
+                     failure:(FailureBlock)failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&lang=zh_cn",city];
+    [self generalRequestWithURL:url
+                        success:^(id model) {
+                            if ([model isKindOfClass:[NSDictionary class]])
+                            {
+                                NSDictionary *dict = (NSDictionary *)model;
+                                NSArray *cities = dict[@"list"];
+                                NSMutableArray *modelArray = [[NSMutableArray alloc] init];
+                                for (NSDictionary *dict in cities)
+                                {
+                                    CityModel *cityModel = [[CityModel alloc] init];
+                                    cityModel.name = dict[@"name"];
+                                    cityModel.customName = dict[@"name"];
+                                    cityModel.lat = dict[@"coord"][@"lat"];
+                                    cityModel.lon = dict[@"coord"][@"lon"];
+                                    cityModel.country = dict[@"sys"][@"country"];
+                                    NSNumber *identifier = dict[@"id"];
+                                    cityModel.identifier = [NSString stringWithFormat:@"%ld",[identifier longValue]];
+                                    [modelArray addObject:cityModel];
+                                }
+                                success(modelArray);
+                            }
+                        } failure:^(NSError *error) {
+                            failure(error);
+                        }];
+}
 
 @end
