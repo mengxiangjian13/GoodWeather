@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FindCityViewControllerDelegate <NSObject>
+
+- (void)findCityViewControllerDidFindCityWithCity:(NSString *)city;
+
+@end
+
 @interface FindCityViewController : UIViewController <UISearchResultsUpdating>
+
+@property (nonatomic,weak) id <FindCityViewControllerDelegate> delegate;
 
 @end

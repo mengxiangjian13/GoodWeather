@@ -9,16 +9,25 @@
 #import "CityViewController.h"
 #import "FindCityViewController.h"
 
-@interface CityViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate>
 {
     NSMutableArray *allCities;
-    
+    // main tableView
     UITableView *listTableView;
+    
+    //searchVC;
+    UISearchController *searchController;
 }
 
 @end
 
 @implementation CityViewController
+
+- (void)dealloc
+{
+    searchController.searchResultsUpdater = nil;
+    searchController = nil;
+}
 
 - (instancetype)initWithCities:(NSArray *)cities
 {
@@ -37,9 +46,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // navigationItem
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                              target:self
-                                                                              action:@selector(close:)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                style:UIBarButtonItemStylePlain
+                                               target:self
+                                               action:@selector(close:)];
     self.navigationItem.leftBarButtonItem = leftItem;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
@@ -52,13 +62,24 @@
     listTableView.delegate = self;
     listTableView.dataSource = self;
     [self.view addSubview:listTableView];
+    
+    FindCityViewController *findVC = [FindCityViewController new];
+    findVC.delegate = self;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        searchController = [[UISearchController alloc] initWithSearchResultsController:findVC];
+        searchController.searchResultsUpdater = findVC;
+        [searchController.searchBar sizeToFit];
+        listTableView.tableHeaderView = searchController.searchBar;
+        searchController.searchBar.placeholder = @"查找并添加新城市";
+    }
 }
 
 #pragma mark -
 #pragma mark UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -86,10 +107,6 @@
     else if (indexPath.section == 1)
     {
         cell.textLabel.text = allCities[indexPath.row];
-    }
-    else
-    {
-        cell.textLabel.text = @"添加新城市";
     }
     
     return cell;
@@ -145,17 +162,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2)
-    {
-        [self addCity:nil];
-    }
+    
 }
 
 #pragma mark -
+
+- (void)findCityViewControllerDidFindCityWithCity:(NSString *)city
+{
+    // cities edit finish
+    [allCities addObject:city];
+    [listTableView reloadData];
+    searchController.searchBar.text = nil;
+}
+
 #pragma mark -
 
 - (void)close:(id)sender
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cityViewControllerDidEndEditWithCities:)])
+    {
+        [self.delegate cityViewControllerDidEndEditWithCities:allCities];
+    }
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -172,21 +200,6 @@
         item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editCityList:)];
     }
     self.navigationItem.rightBarButtonItem = item;
-}
-
-- (void)addCity:(id)sender
-{
-    NSLog(@"add city");
-    FindCityViewController *findVC = [FindCityViewController new];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        UISearchController *searchVC = [[UISearchController alloc] initWithSearchResultsController:findVC];
-        searchVC.searchResultsUpdater = findVC;
-        searchVC.hidesNavigationBarDuringPresentation = NO;
-        [self.navigationController presentViewController:searchVC
-                                                animated:YES
-                                              completion:nil];
-    }
 }
 
 @end

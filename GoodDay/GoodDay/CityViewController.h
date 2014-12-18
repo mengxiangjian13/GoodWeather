@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CityViewControllerDelegate <NSObject>
+
+- (void)cityViewControllerDidEndEditWithCities:(NSArray *)cities;
+
+@end
+
 @interface CityViewController : UIViewController
+
+@property (nonatomic,weak) id <CityViewControllerDelegate> delegate;
 
 - (instancetype)initWithCities:(NSArray *)cities;
 

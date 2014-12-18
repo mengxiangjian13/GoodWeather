@@ -14,7 +14,7 @@
 #import "CityViewController.h"
 #import "CSBannerView.h"
 
-@interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate>
+@interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate,CityViewControllerDelegate>
 {
     NSArray *citys;
     
@@ -22,6 +22,9 @@
     NSMutableDictionary *currentWeatherDict;
     NSMutableDictionary *hourlyForecastDict;
     NSMutableDictionary *dailyForecastDict;
+    
+    // main collectionView
+    UICollectionView *collectionView;
     
     // backgroundImageView
     UIImageView *backgroundImageView;
@@ -77,7 +80,7 @@
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
+    collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
                                                           collectionViewLayout:flowLayout];
     collectionView.backgroundColor = [UIColor clearColor];
     collectionView.dataSource = self;
@@ -106,15 +109,15 @@
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)_collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [citys count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)_collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    RootCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
-                                                                           forIndexPath:indexPath];
+    RootCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
+                                                                forIndexPath:indexPath];
     cell.delegate = self;
     [cell showWeatherForecastWithIndex:indexPath.item city:citys[indexPath.item]];
     
@@ -283,6 +286,7 @@
 {
     NSLog(@"show citys");
     CityViewController *cityListVC = [[CityViewController alloc] initWithCities:citys];
+    cityListVC.delegate = self;
     UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:cityListVC];
     [self presentViewController:naviController animated:YES completion:nil];
 }
@@ -292,6 +296,15 @@
     [TSMessage showNotificationWithTitle:@"更新失败"
                                 subtitle:@"请检查网络状况是否畅通"
                                     type:TSMessageNotificationTypeError];
+}
+
+#pragma mark -
+#pragma mark - CityViewControllerDelegate
+- (void)cityViewControllerDidEndEditWithCities:(NSArray *)cities
+{
+    citys = nil;
+    citys = cities;
+    [collectionView reloadData];
 }
 
 #pragma statusbar
