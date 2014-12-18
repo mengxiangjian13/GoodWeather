@@ -6,6 +6,12 @@
 // project.
 
 
+// CBStoreHouseRefreshControl
+#define COCOAPODS_POD_AVAILABLE_CBStoreHouseRefreshControl
+#define COCOAPODS_VERSION_MAJOR_CBStoreHouseRefreshControl 1
+#define COCOAPODS_VERSION_MINOR_CBStoreHouseRefreshControl 0
+#define COCOAPODS_VERSION_PATCH_CBStoreHouseRefreshControl 0
+
 // HexColors
 #define COCOAPODS_POD_AVAILABLE_HexColors
 #define COCOAPODS_VERSION_MAJOR_HexColors 2
