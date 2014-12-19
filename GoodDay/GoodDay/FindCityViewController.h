@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CityModel.h"
 
 @protocol FindCityViewControllerDelegate <NSObject>
 
-- (void)findCityViewControllerDidFindCityWithCity:(NSString *)city;
+- (void)findCityViewControllerDidFindCityWithCity:(CityModel *)city;
 
 @end
 

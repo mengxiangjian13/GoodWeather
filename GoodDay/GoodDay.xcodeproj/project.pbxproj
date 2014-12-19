@@ -56,6 +56,8 @@
 		CE9F36501A36E4BE007D99FF /* GoodDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */; };
 		CED855241A43DDAD00C26A95 /* refresh.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED855231A43DDAD00C26A95 /* refresh.plist */; };
 		CED855251A43DDAD00C26A95 /* refresh.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED855231A43DDAD00C26A95 /* refresh.plist */; };
+		CED855411A4415FE00C26A95 /* CityListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED855401A4415FE00C26A95 /* CityListHandler.m */; };
+		CED855421A4415FE00C26A95 /* CityListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED855401A4415FE00C26A95 /* CityListHandler.m */; };
 		CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */; };
 		CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B611A3C1D47002B9A00 /* DailyWeatherViewModel.m */; };
 		CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B641A3DD063002B9A00 /* CityViewController.m */; };
@@ -127,6 +129,8 @@
 		CE9F364E1A36E4BE007D99FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodDayTests.m; sourceTree = "<group>"; };
 		CED855231A43DDAD00C26A95 /* refresh.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = refresh.plist; sourceTree = "<group>"; };
+		CED8553F1A4415FE00C26A95 /* CityListHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListHandler.h; sourceTree = "<group>"; };
+		CED855401A4415FE00C26A95 /* CityListHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListHandler.m; sourceTree = "<group>"; };
 		CEF08B5D1A3C1C47002B9A00 /* DailyWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherModel.h; sourceTree = "<group>"; };
 		CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyWeatherModel.m; sourceTree = "<group>"; };
 		CEF08B601A3C1D47002B9A00 /* DailyWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherViewModel.h; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 				CE9F363D1A36E4BE007D99FF /* Main.storyboard */,
 				CE9F36401A36E4BE007D99FF /* Images.xcassets */,
 				CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */,
+				CED8553E1A4415CB00C26A95 /* Handler */,
 				CE8F45651A4288E500183FD3 /* Vendors */,
 				CEF08B661A3DD079002B9A00 /* ViewController */,
 				CEF313661A39A030007EADE7 /* ViewModel */,
@@ -332,6 +337,15 @@
 				CE9F364E1A36E4BE007D99FF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CED8553E1A4415CB00C26A95 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				CED8553F1A4415FE00C26A95 /* CityListHandler.h */,
+				CED855401A4415FE00C26A95 /* CityListHandler.m */,
+			);
+			name = Handler;
 			sourceTree = "<group>";
 		};
 		CEF08B661A3DD079002B9A00 /* ViewController */ = {
@@ -579,6 +593,7 @@
 				CE8F458C1A42976B00183FD3 /* CurrentWeatherViewModel.m in Sources */,
 				CE8F458D1A42976B00183FD3 /* DailyWeatherViewModel.m in Sources */,
 				CE8F458E1A42976B00183FD3 /* FindCityViewController.m in Sources */,
+				CED855421A4415FE00C26A95 /* CityListHandler.m in Sources */,
 				CE8F458F1A42976B00183FD3 /* RootViewController.m in Sources */,
 				CE8F45901A42976B00183FD3 /* DailyWeatherModel.m in Sources */,
 				CE8F45911A42976B00183FD3 /* WeatherInterface.m in Sources */,
@@ -602,6 +617,7 @@
 				CEF313691A39A05A007EADE7 /* CurrentWeatherViewModel.m in Sources */,
 				CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */,
 				CE2599711A4197D500B62683 /* FindCityViewController.m in Sources */,
+				CED855411A4415FE00C26A95 /* CityListHandler.m in Sources */,
 				CEF08B6F1A3F34DF002B9A00 /* RootViewController.m in Sources */,
 				CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */,
 				CE5F84601A37FB8C00545EA4 /* WeatherInterface.m in Sources */,

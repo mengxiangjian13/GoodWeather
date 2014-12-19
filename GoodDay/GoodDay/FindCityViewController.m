@@ -64,7 +64,7 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(findCityViewControllerDidFindCityWithCity:)])
     {
-        [self.delegate findCityViewControllerDidFindCityWithCity:[resultCityArray[indexPath.row] customName]];
+        [self.delegate findCityViewControllerDidFindCityWithCity:resultCityArray[indexPath.row]];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -80,7 +80,7 @@
 }
 
 // searchBar delegate method
-- (void)searchBarTextDidEndEditing:(UISearchBar *)_searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar
 {
     NSLog(@"开始find");
     [[WeatherInterface sharedInterface] findCityWithCityName:_searchBar.text

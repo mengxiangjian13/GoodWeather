@@ -8,6 +8,7 @@
 
 #import "CityViewController.h"
 #import "FindCityViewController.h"
+#import "CityListHandler.h"
 
 @interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate>
 {
@@ -29,21 +30,13 @@
     searchController = nil;
 }
 
-- (instancetype)initWithCities:(NSArray *)cities
-{
-    self = [super init];
-    if (self)
-    {
-        allCities = [[NSMutableArray alloc] initWithArray:cities];
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    allCities = [CityListHandler mutableCityList];
     
     // navigationItem
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
@@ -106,7 +99,8 @@
     }
     else if (indexPath.section == 1)
     {
-        cell.textLabel.text = allCities[indexPath.row];
+        CityModel *city = allCities[indexPath.row];
+        cell.textLabel.text = city.customName;
     }
     
     return cell;
@@ -133,9 +127,11 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSInteger index = sourceIndexPath.row;
-    NSString *city = allCities[index];
+    CityModel *city = allCities[index];
     [allCities removeObjectAtIndex:index];
     [allCities insertObject:city atIndex:destinationIndexPath.row];
+    
+    [CityListHandler synchronize];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,7 +139,16 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [allCities removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if ([allCities count] == 0)
+        {
+            [tableView reloadData];
+        }
+        else
+        {
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        [CityListHandler synchronize];
     }
 }
 
@@ -153,9 +158,18 @@
     {
         return @"当前位置";
     }
-    else if (section == 1)
+    else if (section == 1 && [allCities count] > 0)
     {
         return @"已选城市";
+    }
+    return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == 1 && [allCities count] > 0)
+    {
+        return @"通过右上角的编辑按钮，可以对已选城市进行排序，还可以删除你不再想关注的城市。";
     }
     return nil;
 }
@@ -167,22 +181,24 @@
 
 #pragma mark -
 
-- (void)findCityViewControllerDidFindCityWithCity:(NSString *)city
+- (void)findCityViewControllerDidFindCityWithCity:(CityModel *)city
 {
     // find city finished
     [allCities addObject:city];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[allCities count] - 1 inSection:1];
     [listTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     searchController.searchBar.text = nil;
+    
+    [CityListHandler synchronize];
 }
 
 #pragma mark -
 
 - (void)close:(id)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(cityViewControllerDidEndEditWithCities:)])
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cityViewControllerDidEndEditing)])
     {
-        [self.delegate cityViewControllerDidEndEditWithCities:allCities];
+        [self.delegate cityViewControllerDidEndEditing];
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];

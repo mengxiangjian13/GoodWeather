@@ -59,11 +59,12 @@
                                                                                               error:&error];
                                                 if (object && !error)
                                                 {
-                                                    NSLog(@"%@:%@",url,object);
+                                                    NSLog(@"request success url : %@",url);
                                                     success(object);
                                                 }
                                                 else
                                                 {
+                                                    NSLog(@"request failure url : %@",url);
                                                     failure(error);
                                                 }
                                             }

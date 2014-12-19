@@ -10,14 +10,12 @@
 
 @protocol CityViewControllerDelegate <NSObject>
 
-- (void)cityViewControllerDidEndEditWithCities:(NSArray *)cities;
+- (void)cityViewControllerDidEndEditing;
 
 @end
 
 @interface CityViewController : UIViewController
 
 @property (nonatomic,weak) id <CityViewControllerDelegate> delegate;
-
-- (instancetype)initWithCities:(NSArray *)cities;
 
 @end

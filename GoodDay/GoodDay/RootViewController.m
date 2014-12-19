@@ -13,6 +13,7 @@
 #import "WeatherInterface.h"
 #import "CityViewController.h"
 #import "CSBannerView.h"
+#import "CityListHandler.h"
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate,CityViewControllerDelegate>
 {
@@ -44,6 +45,16 @@
 
 @implementation RootViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([citys count] == 0)
+    {
+        [self showNoCityAlert];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,7 +78,7 @@
     [self.view addSubview:blurImageView];
     
     //fade data
-    citys = @[@"beijing",@"tianjin",@"shanghai",@"chongqing",@"guangzhou",@"shijianzhuang"];
+    citys = [CityListHandler mutableCityList];
 
     // data container initialize
     currentWeatherDict = [[NSMutableDictionary alloc] init];
@@ -106,8 +117,33 @@
     [bannerView loadRequest:adRequest];
     [self.view addSubview:bannerView];
 #endif
+    
 }
 
+- (void)showNoCityAlert
+{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"您还没有关注的任何城市"
+                                                                     message:@"添加城市，开始您的世界旅途吧。"
+                                                              preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *add = [UIAlertAction actionWithTitle:@"去添加城市"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action) {
+                                                    [self showCityList:nil];
+                                                }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"我不想添加"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction *action) {
+                                                    ;
+                                                }];
+    
+    [alertVC addAction:add];
+    [alertVC addAction:cancel];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)_collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -119,7 +155,8 @@
     RootCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
                                                                 forIndexPath:indexPath];
     cell.delegate = self;
-    [cell showWeatherForecastWithIndex:indexPath.item city:citys[indexPath.item]];
+    CityModel *city = citys[indexPath.item];
+    [cell showWeatherForecastWithIndex:indexPath.item city:city.customName];
     
     return cell;
 }
@@ -174,23 +211,23 @@
 - (void)rootCell:(RootCell *)cell currentWeatherDataWithShowBlock:(void(^)(CurrentWeatherViewModel *model,BOOL isCache))block
 {
     NSInteger index = cell.currentIndex;
-    NSString *city = citys[index];
-    if (currentWeatherDict[city])
+    CityModel *city = citys[index];
+    if (currentWeatherDict[city.identifier])
     {
-        CurrentWeatherViewModel *weather = currentWeatherDict[city];
+        CurrentWeatherViewModel *weather = currentWeatherDict[city.identifier];
         block(weather,YES);
         return;
     }
     
     [cell showLoadingView];
     
-    [[WeatherInterface sharedInterface] currentWeatherWithCity:city
+    [[WeatherInterface sharedInterface] currentWeatherWithCity:city.name
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[CurrentWeatherViewModel class]])
                                                            {
                                                                CurrentWeatherViewModel *weather = (CurrentWeatherViewModel *)model;
                                                                [currentWeatherDict setObject:model
-                                                                                      forKey:city];
+                                                                                      forKey:city.identifier];
                                                                // 防止因为重用导致数据不一致
                                                                if (index == cell.currentIndex)
                                                                {
@@ -213,21 +250,21 @@
 - (void)rootCell:(RootCell *)cell hourlyForecastDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block
 {
     NSInteger index = cell.currentIndex;
-    NSString *city = citys[index];
-    if (hourlyForecastDict[city])
+    CityModel *city = citys[index];
+    if (hourlyForecastDict[city.identifier])
     {
-        NSArray *viewModelArray = hourlyForecastDict[city];
+        NSArray *viewModelArray = hourlyForecastDict[city.identifier];
         block(viewModelArray,YES);
         return;
     }
     
-    [[WeatherInterface sharedInterface] hourlyforecastWithCity:city
+    [[WeatherInterface sharedInterface] hourlyforecastWithCity:city.name
                                                      hourCount:8
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[NSArray class]])
                                                            {
                                                                NSArray *viewModelArray = (NSArray *)model;
-                                                               [hourlyForecastDict setObject:viewModelArray forKey:city];
+                                                               [hourlyForecastDict setObject:viewModelArray forKey:city.identifier];
                                                                // 防止因为重用导致数据不一致
                                                                if (index == cell.currentIndex)
                                                                {
@@ -244,21 +281,21 @@
 - (void)rootCell:(RootCell *)cell dailyForecastWeatherDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block
 {
     NSInteger index = cell.currentIndex;
-    NSString *city = citys[index];
-    if (dailyForecastDict[city])
+    CityModel *city = citys[index];
+    if (dailyForecastDict[city.identifier])
     {
-        NSArray *viewModelArray = dailyForecastDict[city];
+        NSArray *viewModelArray = dailyForecastDict[city.identifier];
         block(viewModelArray,YES);
         return;
     }
     
-    [[WeatherInterface sharedInterface] dailyforecastWithCity:city
+    [[WeatherInterface sharedInterface] dailyforecastWithCity:city.name
                                                      dayCount:7
                                                       success:^(id model) {
                                                           if ([model isKindOfClass:[NSArray class]])
                                                           {
                                                               NSArray *viewModelArray = (NSArray *)model;
-                                                              [dailyForecastDict setObject:viewModelArray forKey:city];
+                                                              [dailyForecastDict setObject:viewModelArray forKey:city.identifier];
                                                               // 防止因为重用导致数据不一致
                                                               if (index == cell.currentIndex)
                                                               {
@@ -289,11 +326,11 @@
 
 - (void)rootCellWeatherTableViewDidTriggerRefreshWithRootCell:(RootCell *)cell
 {
-    NSString *city = citys[cell.currentIndex];
-    [currentWeatherDict removeObjectForKey:city];
-    [hourlyForecastDict removeObjectForKey:city];
-    [dailyForecastDict removeObjectForKey:city];
-    [cell showWeatherForecastWithIndex:cell.currentIndex city:city];
+    CityModel *city = citys[cell.currentIndex];
+    [currentWeatherDict removeObjectForKey:city.identifier];
+    [hourlyForecastDict removeObjectForKey:city.identifier];
+    [dailyForecastDict removeObjectForKey:city.identifier];
+    [cell showWeatherForecastWithIndex:cell.currentIndex city:city.customName];
 }
 
 #pragma mark -
@@ -301,7 +338,7 @@
 
 - (void)showCityList:(id)sender
 {
-    CityViewController *cityListVC = [[CityViewController alloc] initWithCities:citys];
+    CityViewController *cityListVC = [[CityViewController alloc] init];
     cityListVC.delegate = self;
     UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:cityListVC];
     [self presentViewController:naviController animated:YES completion:nil];
@@ -318,11 +355,9 @@
 
 #pragma mark -
 #pragma mark - CityViewControllerDelegate
-- (void)cityViewControllerDidEndEditWithCities:(NSArray *)cities
+- (void)cityViewControllerDidEndEditing
 {
     // cities edit finish
-    citys = nil;
-    citys = cities;
     [collectionView reloadData];
 }
 
