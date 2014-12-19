@@ -9,8 +9,11 @@
 #import "CityViewController.h"
 #import "FindCityViewController.h"
 #import "CityListHandler.h"
+#import <CoreLocation/CoreLocation.h>
+#import "WeatherInterface.h"
+#import <TSMessages/TSMessage.h>
 
-@interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate>
+@interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate,CLLocationManagerDelegate>
 {
     NSMutableArray *allCities;
     // main tableView
@@ -18,6 +21,12 @@
     
     //searchVC;
     UISearchController *searchController;
+    
+    // core location
+    CLLocationManager *locationManager;
+    
+    // currentLocation cityModel
+    CityModel *currentLocationCity;
 }
 
 @end
@@ -28,6 +37,7 @@
 {
     searchController.searchResultsUpdater = nil;
     searchController = nil;
+    locationManager.delegate = nil;
 }
 
 - (void)viewDidLoad
@@ -66,6 +76,83 @@
         listTableView.tableHeaderView = searchController.searchBar;
         searchController.searchBar.placeholder = @"查找并添加新城市";
     }
+    
+    // location manager
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    [locationManager requestWhenInUseAuthorization];
+    [locationManager startUpdatingLocation];
+}
+
+- (NSString *)firstRowText
+{
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+    switch (authorizationStatus)
+    {
+        case kCLAuthorizationStatusDenied:
+        {
+            return @"定位服务已关闭";
+        }
+            break;
+        case kCLAuthorizationStatusRestricted:
+        {
+            return @"定位服务受限";
+        }
+            break;
+        default:
+        {
+            if (currentLocationCity)
+            {
+                return currentLocationCity.customName;
+            }
+            return @"正在定位...";
+        }
+            break;
+    }
+    
+    return @"正在定位...";
+}
+
+#pragma mark -
+#pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"lat:%f,lon:%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+
+    if (CLLocationCoordinate2DIsValid(newLocation.coordinate))
+    {
+        [manager stopUpdatingLocation];
+        [self findCurrentLocationInfoWithLocation:newLocation];
+    }
+}
+
+- (void)findCurrentLocationInfoWithLocation:(CLLocation *)location
+{
+    [[WeatherInterface sharedInterface] findCityWithCityLatitude:location.coordinate.latitude
+                                                       longitude:location.coordinate.longitude
+                                                         success:^(id model) {
+                                                             if ([model isKindOfClass:[NSArray class]])
+                                                             {
+                                                                 NSArray *modelArray = (NSArray *)model;
+                                                                 if ([modelArray count] > 0)
+                                                                 {
+                                                                     currentLocationCity = modelArray[0];
+                                                                     [CityListHandler setCurrentLocationCity:currentLocationCity];
+                                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                                         [listTableView reloadData];
+                                                                     });
+                                                                 }
+                                                             }
+                                                         } failure:^(NSError *error) {
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 [TSMessage showNotificationWithTitle:@"获取当前地点失败"
+                                                                                             subtitle:@"请检查网络状况是否畅通"
+                                                                                                 type:TSMessageNotificationTypeError];
+                                                             });
+                                                         }];
 }
 
 #pragma mark -
@@ -95,7 +182,7 @@
     
     if (indexPath.section == 0)
     {
-        cell.textLabel.text = @"正在定位...";
+        cell.textLabel.text = [self firstRowText];
     }
     else if (indexPath.section == 1)
     {

@@ -17,7 +17,7 @@
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate,CityViewControllerDelegate>
 {
-    NSArray *citys;
+    NSMutableArray *citys;
     
     // data container
     NSMutableDictionary *currentWeatherDict;
@@ -78,7 +78,7 @@
     [self.view addSubview:blurImageView];
     
     //fade data
-    citys = [CityListHandler mutableCityList];
+    citys = [[NSMutableArray alloc] initWithArray:[CityListHandler cityList]];
 
     // data container initialize
     currentWeatherDict = [[NSMutableDictionary alloc] init];
@@ -358,6 +358,14 @@
 - (void)cityViewControllerDidEndEditing
 {
     // cities edit finish
+    [citys removeAllObjects];
+    CityModel *currentLocationCity = [CityListHandler currentLocationCity];
+    if (currentLocationCity)
+    {
+        [citys addObject:currentLocationCity];
+    }
+    [citys addObjectsFromArray:[CityListHandler cityList]];
+    
     [collectionView reloadData];
 }
 

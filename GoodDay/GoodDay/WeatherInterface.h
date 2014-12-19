@@ -37,4 +37,9 @@ typedef void (^FailureBlock)(NSError *error);
 - (void)findCityWithCityName:(NSString *)city
                      success:(SuccessBlock)success
                      failure:(FailureBlock)failure;
+
+- (void)findCityWithCityLatitude:(double)lat
+                       longitude:(double)lon
+                         success:(SuccessBlock)success
+                         failure:(FailureBlock)failure;
 @end

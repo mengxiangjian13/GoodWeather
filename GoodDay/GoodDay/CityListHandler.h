@@ -11,6 +11,7 @@
 
 @interface CityListHandler : NSObject
 
+
 + (NSMutableArray *)mutableCityList;
 + (NSArray *)cityList;
 + (void)addCity:(CityModel *)city;
@@ -18,6 +19,10 @@
 + (void)deleteCityAtIndex:(NSInteger)index;
 + (void)exchangeCityAtIndex:(NSInteger)fromIndex withCityAtIndex:(NSInteger)toIndex;
 + (NSInteger)cityListCount;
+
+// current location city
++ (void)setCurrentLocationCity:(CityModel *)city;
++ (CityModel *)currentLocationCity;
 
 + (BOOL)synchronize;
 

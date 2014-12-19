@@ -31,6 +31,7 @@
 
 static NSMutableArray *cityList = nil;
 static NSString *saveFilePath = @"";
+static CityModel *currentLocationCity = nil;
 
 @implementation CityListHandler
 
@@ -135,6 +136,16 @@ static NSString *saveFilePath = @"";
 + (NSInteger)cityListCount
 {
     return [cityList count];
+}
+
++ (void)setCurrentLocationCity:(CityModel *)city
+{
+    currentLocationCity = city;
+}
+
++ (CityModel *)currentLocationCity
+{
+    return currentLocationCity;
 }
 
 + (BOOL)synchronize
