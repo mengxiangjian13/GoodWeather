@@ -21,6 +21,7 @@
 - (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city;
 - (void)showLoadingView;
 - (void)hideLoadingView;
+- (void)stopRefreshing;
 
 @end
 
@@ -31,5 +32,6 @@
 - (void)rootCell:(RootCell *)cell dailyForecastWeatherDataWithShowBlock:(void(^)(NSArray *viewModelArray,BOOL isCache))block;
 @optional
 - (void)rootCell:(RootCell *)cell weatherTableViewDidScrollWithContentOffset:(CGPoint)offset;
+- (void)rootCellWeatherTableViewDidTriggerRefreshWithRootCell:(RootCell *)cell;
 
 @end

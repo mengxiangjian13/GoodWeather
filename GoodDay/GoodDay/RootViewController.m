@@ -196,6 +196,7 @@
                                                                {
                                                                    dispatch_async(dispatch_get_main_queue(), ^{
                                                                        [cell hideLoadingView];
+                                                                       [cell stopRefreshing];
                                                                        block(weather,NO);
                                                                    });
                                                                }
@@ -203,6 +204,7 @@
                                                        } failure:^(NSError *error) {
                                                            [self showNetErrorView];
                                                            [cell hideLoadingView];
+                                                           [cell stopRefreshing];
                                                        }];
 }
 
@@ -283,12 +285,20 @@
     }
 }
 
+- (void)rootCellWeatherTableViewDidTriggerRefreshWithRootCell:(RootCell *)cell
+{
+    NSString *city = citys[cell.currentIndex];
+    [currentWeatherDict removeObjectForKey:city];
+    [hourlyForecastDict removeObjectForKey:city];
+    [dailyForecastDict removeObjectForKey:city];
+    [cell showWeatherForecastWithIndex:cell.currentIndex city:city];
+}
+
 #pragma mark -
 #pragma mark Private Method
 
 - (void)showCityList:(id)sender
 {
-    NSLog(@"show citys");
     CityViewController *cityListVC = [[CityViewController alloc] initWithCities:citys];
     cityListVC.delegate = self;
     UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:cityListVC];

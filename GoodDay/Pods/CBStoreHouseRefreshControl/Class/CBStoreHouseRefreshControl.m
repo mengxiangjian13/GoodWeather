@@ -15,12 +15,6 @@ static const CGFloat kloadingTimingOffset = 0.1;
 static const CGFloat kdisappearDuration = 1.2;
 static const CGFloat krelativeHeightFactor = 2.f/5.f;
 
-typedef enum {
-    CBStoreHouseRefreshControlStateIdle = 0,
-    CBStoreHouseRefreshControlStateRefreshing = 1,
-    CBStoreHouseRefreshControlStateDisappearing = 2
-} CBStoreHouseRefreshControlState;
-
 NSString *const startPointKey = @"startPoints";
 NSString *const endPointKey = @"endPoints";
 NSString *const xKey = @"x";
@@ -41,6 +35,7 @@ NSString *const yKey = @"y";
 @property (nonatomic) CGFloat internalAnimationFactor;
 @property (nonatomic) int horizontalRandomness;
 @property (nonatomic) BOOL reverseLoadingAnimation;
+@property (nonatomic) BOOL originScrollViewPagingEnable;
 
 @end
 
@@ -80,6 +75,7 @@ NSString *const yKey = @"y";
     refreshControl.dropHeight = dropHeight;
     refreshControl.horizontalRandomness = horizontalRandomness;
     refreshControl.scrollView = scrollView;
+    refreshControl.originScrollViewPagingEnable = scrollView.pagingEnabled;
     refreshControl.target = target;
     refreshControl.action = refreshAction;
     refreshControl.reverseLoadingAnimation = reverseLoadingAnimation;
@@ -135,10 +131,13 @@ NSString *const yKey = @"y";
 
 - (void)scrollViewDidScroll
 {
-    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
+//    if (self.originalTopContentInset == 0) self.originalTopContentInset = self.scrollView.contentInset.top;
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.realContentOffsetY*krelativeHeightFactor);
     if (self.state == CBStoreHouseRefreshControlStateIdle)
+    {
+        self.originalTopContentInset = self.scrollView.contentInset.top;
         [self updateBarItemsWithProgress:self.animationProgress];
+    }
 }
 
 - (void)scrollViewDidEndDragging
@@ -148,6 +147,8 @@ NSString *const yKey = @"y";
         if (self.animationProgress == 1) self.state = CBStoreHouseRefreshControlStateRefreshing;
         
         if (self.state == CBStoreHouseRefreshControlStateRefreshing) {
+            
+            self.scrollView.pagingEnabled = NO;
             
             UIEdgeInsets newInsets = self.scrollView.contentInset;
             newInsets.top = self.originalTopContentInset + self.dropHeight;
@@ -264,6 +265,7 @@ NSString *const yKey = @"y";
 
 - (void)finishingLoading
 {
+    self.scrollView.pagingEnabled = self.originScrollViewPagingEnable;
     self.state = CBStoreHouseRefreshControlStateDisappearing;
     UIEdgeInsets newInsets = self.scrollView.contentInset;
     newInsets.top = self.originalTopContentInset;

@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    CBStoreHouseRefreshControlStateIdle = 0,
+    CBStoreHouseRefreshControlStateRefreshing = 1,
+    CBStoreHouseRefreshControlStateDisappearing = 2
+} CBStoreHouseRefreshControlState;
+
 @interface CBStoreHouseRefreshControl : UIView
+
+@property (nonatomic,readonly) CBStoreHouseRefreshControlState state;
 
 + (CBStoreHouseRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
                                            target:(id)target

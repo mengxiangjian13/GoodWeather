@@ -54,6 +54,8 @@
 		CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36401A36E4BE007D99FF /* Images.xcassets */; };
 		CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */; };
 		CE9F36501A36E4BE007D99FF /* GoodDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */; };
+		CED855241A43DDAD00C26A95 /* refresh.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED855231A43DDAD00C26A95 /* refresh.plist */; };
+		CED855251A43DDAD00C26A95 /* refresh.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED855231A43DDAD00C26A95 /* refresh.plist */; };
 		CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */; };
 		CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B611A3C1D47002B9A00 /* DailyWeatherViewModel.m */; };
 		CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B641A3DD063002B9A00 /* CityViewController.m */; };
@@ -124,6 +126,7 @@
 		CE9F36491A36E4BE007D99FF /* GoodDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoodDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9F364E1A36E4BE007D99FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9F364F1A36E4BE007D99FF /* GoodDayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoodDayTests.m; sourceTree = "<group>"; };
+		CED855231A43DDAD00C26A95 /* refresh.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = refresh.plist; sourceTree = "<group>"; };
 		CEF08B5D1A3C1C47002B9A00 /* DailyWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherModel.h; sourceTree = "<group>"; };
 		CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyWeatherModel.m; sourceTree = "<group>"; };
 		CEF08B601A3C1D47002B9A00 /* DailyWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherViewModel.h; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 			children = (
 				CEF08B731A40872C002B9A00 /* bg */,
 				CE5F84551A37E87500545EA4 /* Images */,
+				CED855231A43DDAD00C26A95 /* refresh.plist */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -465,6 +469,7 @@
 				CE8F45A01A42976B00183FD3 /* ChanceAdRes.bundle in Resources */,
 				CE8F45A11A42976B00183FD3 /* LaunchScreen.xib in Resources */,
 				CE8F45A21A42976B00183FD3 /* Images.xcassets in Resources */,
+				CED855251A43DDAD00C26A95 /* refresh.plist in Resources */,
 				CE8F45A31A42976B00183FD3 /* bg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +484,7 @@
 				CE8F45701A4288FD00183FD3 /* ChanceAdRes.bundle in Resources */,
 				CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */,
 				CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */,
+				CED855241A43DDAD00C26A95 /* refresh.plist in Resources */,
 				CEF08B741A40872C002B9A00 /* bg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

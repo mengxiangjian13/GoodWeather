@@ -9,6 +9,7 @@
 #import "RootCell.h"
 #import "SummaryView.h"
 #import "LoadingHud.h"
+#import <CBStoreHouseRefreshControl/CBStoreHouseRefreshControl.h>
 
 
 @interface RootCell () <UITableViewDataSource,UITableViewDelegate>
@@ -21,6 +22,8 @@
     NSMutableArray *dailyForecastArray;
     // loading hud
     LoadingHud *loadingHud;
+    // refresh control
+    CBStoreHouseRefreshControl *refreshControl;
 }
 
 @end
@@ -46,7 +49,14 @@
         weatherTableView.backgroundColor = [UIColor clearColor];
         weatherTableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
         weatherTableView.pagingEnabled = YES;
+        weatherTableView.alwaysBounceVertical = YES;
         [self addSubview:weatherTableView];
+        
+        refreshControl = [CBStoreHouseRefreshControl attachToScrollView:weatherTableView
+                                                                 target:self
+                                                          refreshAction:@selector(refreshTrigger)
+                                                                  plist:@"refresh"];
+        
         
         // show tableHeader
         [self showCurrentWeather];
@@ -118,7 +128,10 @@
     // clear UI
     SummaryView *summaryView = (SummaryView *)weatherTableView.tableHeaderView;
     [summaryView clearView];
-    weatherTableView.contentOffset = CGPointZero;
+    if (refreshControl.state != CBStoreHouseRefreshControlStateRefreshing)
+    {
+        weatherTableView.contentOffset = CGPointZero;
+    }
     
     [self hideLoadingView];
 }
@@ -131,6 +144,16 @@
 - (void)hideLoadingView
 {
     [loadingHud hideLoadingHud];
+}
+
+- (void)stopRefreshing
+{
+    [self performSelector:@selector(finishRefreshControl) withObject:nil afterDelay:0.5 inModes:@[NSRunLoopCommonModes]];
+}
+
+- (void)finishRefreshControl
+{
+    [refreshControl finishingLoading];
 }
 
 #pragma mark -
@@ -218,9 +241,26 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    [refreshControl scrollViewDidScroll];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(rootCell:weatherTableViewDidScrollWithContentOffset:)])
     {
         [self.delegate rootCell:self weatherTableViewDidScrollWithContentOffset:scrollView.contentOffset];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [refreshControl scrollViewDidEndDragging];
+}
+
+#pragma mark -
+#pragma mark refresh control trigger method
+- (void)refreshTrigger
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rootCellWeatherTableViewDidTriggerRefreshWithRootCell:)])
+    {
+        [self.delegate rootCellWeatherTableViewDidTriggerRefreshWithRootCell:self];
     }
 }
 
