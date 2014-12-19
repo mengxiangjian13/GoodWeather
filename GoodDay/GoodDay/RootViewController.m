@@ -51,7 +51,7 @@
     
     if ([citys count] == 0)
     {
-        [self showNoCityAlert];
+        [self showCityList:nil];
     }
 }
 
@@ -123,7 +123,7 @@
 - (void)showNoCityAlert
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"您还没有关注的任何城市"
-                                                                     message:@"添加城市，开始您的世界旅途吧。"
+                                                                     message:@"添加自选城市，开始您的世界旅途吧。"
                                                               preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *add = [UIAlertAction actionWithTitle:@"去添加城市"
                                                   style:UIAlertActionStyleDefault
