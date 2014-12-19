@@ -203,8 +203,10 @@
                                                            }
                                                        } failure:^(NSError *error) {
                                                            [self showNetErrorView];
-                                                           [cell hideLoadingView];
-                                                           [cell stopRefreshing];
+                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                               [cell hideLoadingView];
+                                                               [cell stopRefreshing];
+                                                               });
                                                        }];
 }
 
@@ -307,15 +309,18 @@
 
 - (void)showNetErrorView
 {
-    [TSMessage showNotificationWithTitle:@"更新失败"
-                                subtitle:@"请检查网络状况是否畅通"
-                                    type:TSMessageNotificationTypeError];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [TSMessage showNotificationWithTitle:@"更新失败"
+                                    subtitle:@"请检查网络状况是否畅通"
+                                        type:TSMessageNotificationTypeError];
+    });
 }
 
 #pragma mark -
 #pragma mark - CityViewControllerDelegate
 - (void)cityViewControllerDidEndEditWithCities:(NSArray *)cities
 {
+    // cities edit finish
     citys = nil;
     citys = cities;
     [collectionView reloadData];

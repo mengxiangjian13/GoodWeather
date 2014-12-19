@@ -169,9 +169,10 @@
 
 - (void)findCityViewControllerDidFindCityWithCity:(NSString *)city
 {
-    // cities edit finish
+    // find city finished
     [allCities addObject:city];
-    [listTableView reloadData];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[allCities count] - 1 inSection:1];
+    [listTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     searchController.searchBar.text = nil;
 }
 
