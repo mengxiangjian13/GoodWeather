@@ -17,5 +17,6 @@
 @property (nonatomic,strong) NSNumber *lon; // longitude
 @property (nonatomic,strong) NSString *identifier;
 @property (nonatomic,strong) NSString *country;
+@property (nonatomic,assign) BOOL isCurrentLocation;
 
 @end

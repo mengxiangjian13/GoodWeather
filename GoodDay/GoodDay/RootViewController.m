@@ -14,6 +14,7 @@
 #import "CityViewController.h"
 #import "CSBannerView.h"
 #import "CityListHandler.h"
+#import "LocationHandler.h"
 
 @interface RootViewController () <UICollectionViewDataSource,UICollectionViewDelegate,RootCellDelegate,CityViewControllerDelegate>
 {
@@ -49,10 +50,7 @@
 {
     [super viewDidAppear:animated];
     
-    if ([citys count] == 0)
-    {
-        [self showCityList:nil];
-    }
+    [self coreLocationAuthorizeStatusChange];
 }
 
 - (void)viewDidLoad
@@ -78,7 +76,15 @@
     [self.view addSubview:blurImageView];
     
     //fade data
-    citys = [[NSMutableArray alloc] initWithArray:[CityListHandler cityList]];
+    if ([[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateDenied ||
+        [[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateRestricted)
+    {
+        citys = [[NSMutableArray alloc] initWithArray:[CityListHandler cityList]];
+    }
+    else
+    {
+        citys = [[NSMutableArray alloc] init];
+    }
 
     // data container initialize
     currentWeatherDict = [[NSMutableDictionary alloc] init];
@@ -118,6 +124,10 @@
     [self.view addSubview:bannerView];
 #endif
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cityViewControllerDidEndEditing) name:LocationHandlerGetCurrentLocationNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coreLocationAuthorizeStatusChange)
+                                                 name:LocationHandlerAuthorizeStatusChangeNotification object:nil];
+    
 }
 
 - (void)showNoCityAlert
@@ -142,6 +152,18 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)coreLocationAuthorizeStatusChange
+{
+    if ([[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateDenied ||
+        [[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateRestricted)
+    {
+        if ([citys count] == 0)
+        {
+            [self showCityList:nil];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark UICollectionViewDataSource
 
@@ -156,7 +178,7 @@
                                                                 forIndexPath:indexPath];
     cell.delegate = self;
     CityModel *city = citys[indexPath.item];
-    [cell showWeatherForecastWithIndex:indexPath.item city:city.customName];
+    [cell showWeatherForecastWithIndex:indexPath.item city:city.customName isCurrentLocation:city.isCurrentLocation];
     
     return cell;
 }
@@ -330,7 +352,7 @@
     [currentWeatherDict removeObjectForKey:city.identifier];
     [hourlyForecastDict removeObjectForKey:city.identifier];
     [dailyForecastDict removeObjectForKey:city.identifier];
-    [cell showWeatherForecastWithIndex:cell.currentIndex city:city.customName];
+    [cell showWeatherForecastWithIndex:cell.currentIndex city:city.customName isCurrentLocation:city.isCurrentLocation];
 }
 
 #pragma mark -

@@ -76,7 +76,7 @@
     weatherTableView.tableHeaderView = summaryView;
 }
 
-- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city
+- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city isCurrentLocation:(BOOL)isCurrentLocation
 {
     [self clearView];
     
@@ -92,6 +92,10 @@
             summaryView.currentTemperatureLabel.text = weather.currentTemperature;
             summaryView.floatTemperatureLabel.text = weather.floatTemperature;
             summaryView.otherConditionLabel.text = weather.otherCondition;
+            if (isCurrentLocation)
+            {
+                summaryView.isCurrentLocationLabel.text = @"(当前位置)";
+            }
             [summaryView showWeatherWithAnimation:!isCache];
         }];
     }
@@ -101,6 +105,7 @@
         [self.delegate rootCell:self hourlyForecastDataWithShowBlock:^(NSArray *viewModelArray, BOOL isCache) {
             if (viewModelArray && [viewModelArray isKindOfClass:[NSArray class]])
             {
+                [hourForecastArray removeAllObjects];
                 [hourForecastArray addObjectsFromArray:viewModelArray];
                 [weatherTableView reloadData];
             }
@@ -112,6 +117,7 @@
         [self.delegate rootCell:self dailyForecastWeatherDataWithShowBlock:^(NSArray *viewModelArray, BOOL isCache) {
             if (viewModelArray && [viewModelArray isKindOfClass:[NSArray class]])
             {
+                [dailyForecastArray removeAllObjects];
                 [dailyForecastArray addObjectsFromArray:viewModelArray];
                 [weatherTableView reloadData];
             }
@@ -121,10 +127,6 @@
 
 - (void)clearView
 {
-    // clear Data
-    [hourForecastArray removeAllObjects];
-    [dailyForecastArray removeAllObjects];
-    
     // clear UI
     SummaryView *summaryView = (SummaryView *)weatherTableView.tableHeaderView;
     [summaryView clearView];

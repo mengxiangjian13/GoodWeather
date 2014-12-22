@@ -18,7 +18,7 @@
     }
     
     [self.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[UIView class]] && obj != self.cityLabel)
+        if ([obj isKindOfClass:[UIView class]] && obj != self.cityLabel && obj != self.isCurrentLocationLabel)
         {
             UIView *view = (UIView *)obj;
             if (ADBANNER == 1)
@@ -55,6 +55,7 @@
     self.floatTemperatureLabel.text = nil;
     self.otherConditionLabel.text = nil;
     self.currentTemperatureLabel.text = nil;
+    self.isCurrentLocationLabel.text = nil;
 }
 
 

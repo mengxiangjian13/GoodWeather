@@ -10,8 +10,8 @@
 #import "FindCityViewController.h"
 #import "CityListHandler.h"
 #import <CoreLocation/CoreLocation.h>
-#import "WeatherInterface.h"
 #import <TSMessages/TSMessage.h>
+#import "LocationHandler.h"
 
 @interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate,CLLocationManagerDelegate>
 {
@@ -21,12 +21,6 @@
     
     //searchVC;
     UISearchController *searchController;
-    
-    // core location
-    CLLocationManager *locationManager;
-    
-    // currentLocation cityModel
-    CityModel *currentLocationCity;
 }
 
 @end
@@ -37,7 +31,7 @@
 {
     searchController.searchResultsUpdater = nil;
     searchController = nil;
-    locationManager.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -77,30 +71,27 @@
         searchController.searchBar.placeholder = @"查找并添加新城市";
     }
     
-    // location manager
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    [locationManager requestWhenInUseAuthorization];
-    [locationManager startUpdatingLocation];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:LocationHandlerGetCurrentLocationNotification object:nil];
 }
 
 - (NSString *)firstRowText
 {
-    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
-    switch (authorizationStatus)
+    LocationServiceState state = [LocationHandler sharedHandler].locationServiceState;
+    switch (state)
     {
-        case kCLAuthorizationStatusDenied:
+        case LocationServiceStateDenied:
         {
             return @"定位服务已关闭";
         }
             break;
-        case kCLAuthorizationStatusRestricted:
+        case LocationServiceStateRestricted:
         {
             return @"定位服务受限";
         }
             break;
         default:
         {
+            CityModel *currentLocationCity = [CityListHandler currentLocationCity];
             if (currentLocationCity)
             {
                 return currentLocationCity.customName;
@@ -113,46 +104,12 @@
     return @"正在定位...";
 }
 
-#pragma mark -
-#pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
+- (void)reloadTableView
 {
-    NSLog(@"lat:%f,lon:%f",newLocation.coordinate.latitude,newLocation.coordinate.longitude);
-
-    if (CLLocationCoordinate2DIsValid(newLocation.coordinate))
+    if (listTableView)
     {
-        [manager stopUpdatingLocation];
-        [self findCurrentLocationInfoWithLocation:newLocation];
+        [listTableView reloadData];
     }
-}
-
-- (void)findCurrentLocationInfoWithLocation:(CLLocation *)location
-{
-    [[WeatherInterface sharedInterface] findCityWithCityLatitude:location.coordinate.latitude
-                                                       longitude:location.coordinate.longitude
-                                                         success:^(id model) {
-                                                             if ([model isKindOfClass:[NSArray class]])
-                                                             {
-                                                                 NSArray *modelArray = (NSArray *)model;
-                                                                 if ([modelArray count] > 0)
-                                                                 {
-                                                                     currentLocationCity = modelArray[0];
-                                                                     [CityListHandler setCurrentLocationCity:currentLocationCity];
-                                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                                         [listTableView reloadData];
-                                                                     });
-                                                                 }
-                                                             }
-                                                         } failure:^(NSError *error) {
-                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                 [TSMessage showNotificationWithTitle:@"获取当前地点失败"
-                                                                                             subtitle:@"请检查网络状况是否畅通"
-                                                                                                 type:TSMessageNotificationTypeError];
-                                                             });
-                                                         }];
 }
 
 #pragma mark -
@@ -257,6 +214,14 @@
     if (section == 1 && [allCities count] > 0)
     {
         return @"通过右上角的编辑按钮，可以对已选城市进行排序，还可以删除你不再想关注的城市。";
+    }
+    else if (section == 0)
+    {
+        if ([[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateDenied ||
+            [[LocationHandler sharedHandler] locationServiceState] == LocationServiceStateRestricted)
+        {
+            return @"请确认您在系统设置->隐私->定位服务中已经开启了本app的定位服务，好天儿才能帮您找到您当前位置的天气信息。";
+        }
     }
     return nil;
 }

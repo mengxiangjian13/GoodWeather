@@ -16,6 +16,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *currentTemperatureLabel;
 @property (nonatomic,weak) IBOutlet UILabel *floatTemperatureLabel;
 @property (weak,nonatomic) IBOutlet UILabel *otherConditionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *isCurrentLocationLabel;
 
 - (void)showWeatherWithAnimation:(BOOL)animation;
 

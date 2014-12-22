@@ -58,6 +58,8 @@
 		CED855251A43DDAD00C26A95 /* refresh.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED855231A43DDAD00C26A95 /* refresh.plist */; };
 		CED855411A4415FE00C26A95 /* CityListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED855401A4415FE00C26A95 /* CityListHandler.m */; };
 		CED855421A4415FE00C26A95 /* CityListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED855401A4415FE00C26A95 /* CityListHandler.m */; };
+		CEDCAA8C1A48119500312399 /* LocationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCAA8B1A48119500312399 /* LocationHandler.m */; };
+		CEDCAA8D1A48119500312399 /* LocationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCAA8B1A48119500312399 /* LocationHandler.m */; };
 		CEF08B5F1A3C1C47002B9A00 /* DailyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */; };
 		CEF08B621A3C1D47002B9A00 /* DailyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B611A3C1D47002B9A00 /* DailyWeatherViewModel.m */; };
 		CEF08B651A3DD063002B9A00 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B641A3DD063002B9A00 /* CityViewController.m */; };
@@ -131,6 +133,8 @@
 		CED855231A43DDAD00C26A95 /* refresh.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = refresh.plist; sourceTree = "<group>"; };
 		CED8553F1A4415FE00C26A95 /* CityListHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListHandler.h; sourceTree = "<group>"; };
 		CED855401A4415FE00C26A95 /* CityListHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListHandler.m; sourceTree = "<group>"; };
+		CEDCAA8A1A48119500312399 /* LocationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationHandler.h; sourceTree = "<group>"; };
+		CEDCAA8B1A48119500312399 /* LocationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationHandler.m; sourceTree = "<group>"; };
 		CEF08B5D1A3C1C47002B9A00 /* DailyWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherModel.h; sourceTree = "<group>"; };
 		CEF08B5E1A3C1C47002B9A00 /* DailyWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyWeatherModel.m; sourceTree = "<group>"; };
 		CEF08B601A3C1D47002B9A00 /* DailyWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyWeatherViewModel.h; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 			children = (
 				CED8553F1A4415FE00C26A95 /* CityListHandler.h */,
 				CED855401A4415FE00C26A95 /* CityListHandler.m */,
+				CEDCAA8A1A48119500312399 /* LocationHandler.h */,
+				CEDCAA8B1A48119500312399 /* LocationHandler.m */,
 			);
 			name = Handler;
 			sourceTree = "<group>";
@@ -587,6 +593,7 @@
 				CE8F45871A42976B00183FD3 /* CityModel.m in Sources */,
 				CE8F45881A42976B00183FD3 /* HourlyWeatherModel.m in Sources */,
 				CEF08B781A431F23002B9A00 /* LoadingHud.m in Sources */,
+				CEDCAA8D1A48119500312399 /* LocationHandler.m in Sources */,
 				CE8F45891A42976B00183FD3 /* AppDelegate.m in Sources */,
 				CE8F458A1A42976B00183FD3 /* main.m in Sources */,
 				CE8F458B1A42976B00183FD3 /* HourlyWeatherViewModel.m in Sources */,
@@ -611,6 +618,7 @@
 				CE25996E1A41753800B62683 /* CityModel.m in Sources */,
 				CE4AFD6B1A3AFAD4001C25F6 /* HourlyWeatherModel.m in Sources */,
 				CEF08B771A431F23002B9A00 /* LoadingHud.m in Sources */,
+				CEDCAA8C1A48119500312399 /* LocationHandler.m in Sources */,
 				CE9F36391A36E4BE007D99FF /* AppDelegate.m in Sources */,
 				CE9F36361A36E4BE007D99FF /* main.m in Sources */,
 				CE4AFD6E1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ChanceAd.h"
+#import "LocationHandler.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,8 @@
 #if ADBANNER==1
     [ChanceAd startSession:@"100032-4CE817-ABA2-5B48-14D009296720"];
 #endif
+    
+    [[LocationHandler sharedHandler] startUpdateLocation];
     
     return YES;
 }
