@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
@@ -12,11 +11,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5H4-EK-ghc">
-                    <rect key="frame" x="0.0" y="20" width="600" height="30"/>
+                    <rect key="frame" x="0.0" y="20" width="600" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Ka8-dh-PXJ"/>
+                        <constraint firstAttribute="height" constant="50" id="Ka8-dh-PXJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -63,11 +62,22 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11l-mH-hdP">
+                    <rect key="frame" x="0.0" y="70" width="600" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="yPk-bo-Etc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="h1d-zO-h2P" secondAttribute="trailing" constant="20" id="8gG-DA-7QZ"/>
                 <constraint firstItem="jMV-Ja-Hcm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="C6H-7f-SQv"/>
+                <constraint firstItem="11l-mH-hdP" firstAttribute="top" secondItem="5H4-EK-ghc" secondAttribute="bottom" id="Fny-ni-qIC"/>
+                <constraint firstAttribute="trailing" secondItem="11l-mH-hdP" secondAttribute="trailing" id="FuQ-Bg-i0C"/>
                 <constraint firstItem="5H4-EK-ghc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G92-WT-dei"/>
                 <constraint firstAttribute="bottom" secondItem="iRJ-Sq-UrD" secondAttribute="bottom" constant="250" id="NQV-w8-9Jo"/>
                 <constraint firstAttribute="bottom" secondItem="8uc-55-6LY" secondAttribute="bottom" constant="250" id="Tsn-2M-Dcs"/>
@@ -82,6 +92,7 @@
                 <constraint firstAttribute="trailing" secondItem="jMV-Ja-Hcm" secondAttribute="trailing" constant="20" id="qOS-VI-Xak"/>
                 <constraint firstItem="5H4-EK-ghc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="r7t-zs-lTw"/>
                 <constraint firstItem="iRJ-Sq-UrD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="rw8-oV-ehe"/>
+                <constraint firstItem="11l-mH-hdP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uZb-9p-1ie"/>
                 <constraint firstItem="h1d-zO-h2P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="zwL-op-Iju"/>
             </constraints>
             <connections>
@@ -90,6 +101,7 @@
                 <outlet property="currentTemperatureLabel" destination="h1d-zO-h2P" id="FhL-1s-vfd"/>
                 <outlet property="floatTemperatureLabel" destination="Fca-VK-pB8" id="IbA-hF-gk5"/>
                 <outlet property="icon" destination="iRJ-Sq-UrD" id="Klz-KO-3Sl"/>
+                <outlet property="isCurrentLocationLabel" destination="11l-mH-hdP" id="1T7-aB-4RM"/>
                 <outlet property="otherConditionLabel" destination="jMV-Ja-Hcm" id="GC9-Yo-cM0"/>
             </connections>
             <point key="canvasLocation" x="570" y="475"/>
