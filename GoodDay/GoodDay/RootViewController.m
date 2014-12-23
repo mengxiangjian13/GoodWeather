@@ -37,6 +37,7 @@
     
     // current page
     NSInteger showingPage;
+    NSInteger previousPage;
     
     // ad banner
     CSBannerView *bannerView;
@@ -61,6 +62,7 @@
     [TSMessage setDefaultViewController:self];
     
     showingPage = 0;
+    previousPage = 0;
     
     backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     backgroundImageView.image = [UIImage imageNamed:@"bg/bg"];
@@ -218,14 +220,18 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     // move cityButton and adBanner to origin position
-    [UIView animateWithDuration:0.5
-                     animations:^{
-                         cityListButton.transform = CGAffineTransformIdentity;
-                         if (bannerView)
-                         {
-                             bannerView.transform = CGAffineTransformIdentity;
-                         }
-                     }];
+    if (previousPage != showingPage)
+    {
+        previousPage = showingPage;
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             cityListButton.transform = CGAffineTransformIdentity;
+                             if (bannerView)
+                             {
+                                 bannerView.transform = CGAffineTransformIdentity;
+                             }
+                         }];
+    }
 }
 
 #pragma mark -
@@ -337,7 +343,7 @@
     CGFloat alpha = offset / self.view.bounds.size.height;
     blurImageView.alpha = MIN(alpha, 1.0);
     
-    CGFloat translate = MIN(contentOffset.y, 50.0);
+    CGFloat translate = MIN(contentOffset.y, 60.0);
     translate = MAX(translate, 0);
     cityListButton.transform = CGAffineTransformMakeTranslation(0, - translate);
     if (bannerView)

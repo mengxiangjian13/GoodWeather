@@ -29,7 +29,7 @@
     
     resultCityArray = [[NSMutableArray alloc] init];
     
-    searchTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    searchTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     searchTableView.delegate = self;
     searchTableView.dataSource = self;
     [self.view addSubview:searchTableView];
@@ -58,6 +58,15 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@ , %@",model.customName,model.country];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([resultCityArray count] > 0)
+    {
+        return @"可选城市";
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

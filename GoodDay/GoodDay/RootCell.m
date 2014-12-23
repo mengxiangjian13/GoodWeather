@@ -236,7 +236,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return MAX(44, tableView.bounds.size.height / ((CGFloat)[hourForecastArray count]+1));
+    CGFloat height = 44;
+    if ([hourForecastArray count] > 0)
+    {
+        height = MAX(44, tableView.bounds.size.height / ((CGFloat)[hourForecastArray count]+1));
+    }
+    else if ([dailyForecastArray count] > 0)
+    {
+        height = MAX(44, tableView.bounds.size.height / ((CGFloat)[dailyForecastArray count]+1));
+    }
+    return height;
 }
 
 #pragma mark UIScrollViewDelegate
