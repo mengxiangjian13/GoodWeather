@@ -76,7 +76,7 @@
     weatherTableView.tableHeaderView = summaryView;
 }
 
-- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city isCurrentLocation:(BOOL)isCurrentLocation
+- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city country:(NSString *)country isCurrentLocation:(BOOL)isCurrentLocation
 {
     [self clearView];
     
@@ -95,6 +95,10 @@
             if (isCurrentLocation)
             {
                 summaryView.isCurrentLocationLabel.text = @"(当前位置)";
+            }
+            else
+            {
+                summaryView.isCurrentLocationLabel.text = [NSString stringWithFormat:@"(%@)",country];
             }
             [summaryView showWeatherWithAnimation:!isCache];
         }];

@@ -180,7 +180,7 @@
                                                                 forIndexPath:indexPath];
     cell.delegate = self;
     CityModel *city = citys[indexPath.item];
-    [cell showWeatherForecastWithIndex:indexPath.item city:city.customName isCurrentLocation:city.isCurrentLocation];
+    [cell showWeatherForecastWithIndex:indexPath.item city:city.customName country:city.country isCurrentLocation:city.isCurrentLocation];
     
     return cell;
 }
@@ -358,7 +358,7 @@
     [currentWeatherDict removeObjectForKey:city.identifier];
     [hourlyForecastDict removeObjectForKey:city.identifier];
     [dailyForecastDict removeObjectForKey:city.identifier];
-    [cell showWeatherForecastWithIndex:cell.currentIndex city:city.customName isCurrentLocation:city.isCurrentLocation];
+    [cell showWeatherForecastWithIndex:cell.currentIndex city:city.customName country:city.country isCurrentLocation:city.isCurrentLocation];
 }
 
 #pragma mark -

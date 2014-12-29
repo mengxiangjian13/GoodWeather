@@ -143,7 +143,7 @@
     else if (indexPath.section == 1)
     {
         CityModel *city = allCities[indexPath.row];
-        cell.textLabel.text = city.customName;
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",city.customName,city.country];
     }
     
     return cell;

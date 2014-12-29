@@ -18,7 +18,7 @@
 @property (nonatomic,assign) NSInteger currentIndex;
 @property (nonatomic,weak) id <RootCellDelegate> delegate;
 
-- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city isCurrentLocation:(BOOL)isCurrentLocation;
+- (void)showWeatherForecastWithIndex:(NSInteger)index city:(NSString *)city country:(NSString *)country isCurrentLocation:(BOOL)isCurrentLocation;
 - (void)showLoadingView;
 - (void)hideLoadingView;
 - (void)stopRefreshing;
