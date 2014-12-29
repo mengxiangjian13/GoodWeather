@@ -249,7 +249,7 @@
     
     [cell showLoadingView];
     
-    [[WeatherInterface sharedInterface] currentWeatherWithCity:city.name
+    [[WeatherInterface sharedInterface] currentWeatherWithCityID:city.identifier
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[CurrentWeatherViewModel class]])
                                                            {
@@ -286,7 +286,7 @@
         return;
     }
     
-    [[WeatherInterface sharedInterface] hourlyforecastWithCity:city.name
+    [[WeatherInterface sharedInterface] hourlyforecastWithCityID:city.identifier
                                                      hourCount:8
                                                        success:^(id model) {
                                                            if ([model isKindOfClass:[NSArray class]])
@@ -317,7 +317,7 @@
         return;
     }
     
-    [[WeatherInterface sharedInterface] dailyforecastWithCity:city.name
+    [[WeatherInterface sharedInterface] dailyforecastWithCityID:city.identifier
                                                      dayCount:7
                                                       success:^(id model) {
                                                           if ([model isKindOfClass:[NSArray class]])

@@ -195,6 +195,122 @@
                         }];
 }
 
+- (void)currentWeatherWithCityID:(NSString *)identifier
+                         success:(SuccessBlock)success
+                         failure:(FailureBlock)failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%@&lang=zh_cn&units=metric",identifier];
+    [self generalRequestWithURL:url
+                        success:^(id model) {
+                            if ([model isKindOfClass:[NSDictionary class]])
+                            {
+                                NSDictionary *dict = (NSDictionary *)model;
+                                CurrentWeatherModel *model = [MTLJSONAdapter modelOfClass:[CurrentWeatherModel class]
+                                                                       fromJSONDictionary:dict
+                                                                                    error:nil];
+                                CurrentWeatherViewModel *viewModel = [[CurrentWeatherViewModel alloc] initWithWeatherModel:model];
+                                success(viewModel);
+                            }
+                            else
+                            {
+                                failure(nil);
+                            }
+                        } failure:^(NSError *error) {
+                            failure(error);
+                        }];
+}
+
+- (void)hourlyforecastWithCityID:(NSString *)identifier
+                       hourCount:(NSInteger)count
+                         success:(SuccessBlock)success
+                         failure:(FailureBlock)failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?id=%@&lang=zh_cn&units=metric",identifier];
+    [self generalRequestWithURL:url
+                        success:^(id model) {
+                            if ([model isKindOfClass:[NSDictionary class]])
+                            {
+                                NSDictionary *dict = (NSDictionary *)model;
+                                id list = [dict objectForKey:@"list"];
+                                if ([list isKindOfClass:[NSArray class]])
+                                {
+                                    NSArray *_list = (NSArray *)list;
+                                    NSArray *modelList = [MTLJSONAdapter modelsOfClass:[HourlyWeatherModel class]
+                                                                         fromJSONArray:_list
+                                                                                 error:nil];
+                                    NSMutableArray *viewModelArray = [[NSMutableArray alloc] init];
+                                    // choose hourly weather after now
+                                    NSInteger validCount = 0;
+                                    for (HourlyWeatherModel *model in modelList)
+                                    {
+                                        NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+                                        if ([model.timestamp integerValue] > timestamp)
+                                        {
+                                            HourlyWeatherViewModel *viewModel = [[HourlyWeatherViewModel alloc] initWithWeatherModel:model];
+                                            [viewModelArray addObject:viewModel];
+                                            ++ validCount;
+                                            if (validCount == count)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    success(viewModelArray);
+                                }
+                                else
+                                {
+                                    failure(nil);
+                                }
+                            }
+                            else
+                            {
+                                failure(nil);
+                            }
+                        } failure:^(NSError *error) {
+                            failure(error);
+                        }];
+}
+
+- (void)dailyforecastWithCityID:(NSString *)identifier
+                       dayCount:(NSInteger)count
+                        success:(SuccessBlock)success
+                        failure:(FailureBlock)failure
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?id=%@&lang=zh_cn&units=metric&cnt=%ld",identifier,(long)count];
+    [self generalRequestWithURL:url
+                        success:^(id model) {
+                            if ([model isKindOfClass:[NSDictionary class]])
+                            {
+                                NSDictionary *dict = (NSDictionary *)model;
+                                id list = [dict objectForKey:@"list"];
+                                if ([list isKindOfClass:[NSArray class]])
+                                {
+                                    NSArray *_list = (NSArray *)list;
+                                    NSArray *modelList = [MTLJSONAdapter modelsOfClass:[DailyWeatherModel class]
+                                                                         fromJSONArray:_list
+                                                                                 error:nil];
+                                    NSMutableArray *viewModelArray = [[NSMutableArray alloc] init];
+                                    for (DailyWeatherModel *model in modelList)
+                                    {
+                                        DailyWeatherViewModel *viewModel = [[DailyWeatherViewModel alloc] initWithWeatherModel:model];
+                                        [viewModelArray addObject:viewModel];
+                                    }
+                                    success(viewModelArray);
+                                }
+                                else
+                                {
+                                    failure(nil);
+                                }
+                            }
+                            else
+                            {
+                                failure(nil);
+                            }
+                        } failure:^(NSError *error) {
+                            failure(error);
+                        }];
+}
+
 - (void)findCityWithCityName:(NSString *)city
                      success:(SuccessBlock)success
                      failure:(FailureBlock)failure

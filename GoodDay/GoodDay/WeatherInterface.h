@@ -34,6 +34,20 @@ typedef void (^FailureBlock)(NSError *error);
                     success:(SuccessBlock)success
                     failure:(FailureBlock)failure;
 
+- (void)currentWeatherWithCityID:(NSString *)identifier
+                         success:(SuccessBlock)success
+                         failure:(FailureBlock)failure;
+
+- (void)hourlyforecastWithCityID:(NSString *)identifier
+                       hourCount:(NSInteger)count
+                         success:(SuccessBlock)success
+                         failure:(FailureBlock)failure;
+
+- (void)dailyforecastWithCityID:(NSString *)identifier
+                       dayCount:(NSInteger)count
+                        success:(SuccessBlock)success
+                        failure:(FailureBlock)failure;
+
 - (void)findCityWithCityName:(NSString *)city
                      success:(SuccessBlock)success
                      failure:(FailureBlock)failure;
