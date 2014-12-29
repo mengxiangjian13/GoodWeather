@@ -10,7 +10,6 @@
 #import "FindCityViewController.h"
 #import "CityListHandler.h"
 #import <CoreLocation/CoreLocation.h>
-#import <TSMessages/TSMessage.h>
 #import "LocationHandler.h"
 
 @interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate,CLLocationManagerDelegate>

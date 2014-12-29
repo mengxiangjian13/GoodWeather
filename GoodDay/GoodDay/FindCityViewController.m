@@ -9,6 +9,7 @@
 #import "FindCityViewController.h"
 #import <UIImageView+LBBlurredImage.h>
 #import "WeatherInterface.h"
+#import <TSMessages/TSMessage.h>
 
 @interface FindCityViewController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
@@ -99,7 +100,16 @@
                                                              [resultCityArray removeAllObjects];
                                                              [resultCityArray addObjectsFromArray:model];
                                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                                 [searchTableView reloadData];
+                                                                 if ([resultCityArray count] > 0)
+                                                                 {
+                                                                     [searchTableView reloadData];
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"没有搜索到相关结果" message:@"请检查输入是否正确" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                                                                     [alert show];
+                                                                 }
+                                                                 
                                                              });
                                                          }
                                                      } failure:^(NSError *error) {
