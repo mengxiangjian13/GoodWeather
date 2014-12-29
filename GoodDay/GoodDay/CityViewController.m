@@ -11,6 +11,7 @@
 #import "CityListHandler.h"
 #import <CoreLocation/CoreLocation.h>
 #import "LocationHandler.h"
+#import "CitySettingViewController.h"
 
 @interface CityViewController () <UITableViewDataSource,UITableViewDelegate,FindCityViewControllerDelegate,CLLocationManagerDelegate>
 {
@@ -227,7 +228,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 1)
+    {
+        CityModel *city = allCities[indexPath.row];
+        CitySettingViewController *settingVC = [[CitySettingViewController alloc] initWithCity:city];
+        [self.navigationController pushViewController:settingVC animated:YES];
+    }
 }
 
 #pragma mark -
