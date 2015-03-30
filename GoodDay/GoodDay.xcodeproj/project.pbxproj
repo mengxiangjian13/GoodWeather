@@ -10,6 +10,8 @@
 		7189AE0B49AE4B437E1DD952 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C756F028BA0CBF1399D82C2 /* libPods.a */; };
 		CE25996E1A41753800B62683 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE25996D1A41753800B62683 /* CityModel.m */; };
 		CE2599711A4197D500B62683 /* FindCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2599701A4197D500B62683 /* FindCityViewController.m */; };
+		CE2F9E1E1AC93B68003E5C61 /* ChanceAdRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE2F9E181AC93B68003E5C61 /* ChanceAdRes.bundle */; };
+		CE2F9E1F1AC93B68003E5C61 /* libChanceAd_Lite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2F9E1D1AC93B68003E5C61 /* libChanceAd_Lite.a */; };
 		CE4AFD6B1A3AFAD4001C25F6 /* HourlyWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AFD6A1A3AFAD4001C25F6 /* HourlyWeatherModel.m */; };
 		CE4AFD6E1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4AFD6D1A3AFCA0001C25F6 /* HourlyWeatherViewModel.m */; };
 		CE5F84561A37E87500545EA4 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = CE5F84551A37E87500545EA4 /* Images */; };
@@ -17,7 +19,6 @@
 		CE5F845C1A37EF1F00545EA4 /* SummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F845B1A37EF1F00545EA4 /* SummaryView.m */; };
 		CE5F84601A37FB8C00545EA4 /* WeatherInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F845F1A37FB8C00545EA4 /* WeatherInterface.m */; };
 		CE5F84631A3800CA00545EA4 /* CurrentWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */; };
-		CE8F45701A4288FD00183FD3 /* ChanceAdRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */; };
 		CE8F45831A42976B00183FD3 /* RootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF08B711A3F386F002B9A00 /* RootCell.m */; };
 		CE8F45841A42976B00183FD3 /* SummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F845B1A37EF1F00545EA4 /* SummaryView.m */; };
 		CE8F45851A42976B00183FD3 /* CurrentWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */; };
@@ -40,11 +41,9 @@
 		CE8F45971A42976B00183FD3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45741A42896400183FD3 /* StoreKit.framework */; };
 		CE8F45981A42976B00183FD3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F45721A42895C00183FD3 /* AdSupport.framework */; };
 		CE8F45991A42976B00183FD3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C756F028BA0CBF1399D82C2 /* libPods.a */; };
-		CE8F459A1A42976B00183FD3 /* libChanceAd_NoAppZone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */; };
 		CE8F459C1A42976B00183FD3 /* SummaryViewAD.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F457E1A42966E00183FD3 /* SummaryViewAD.xib */; };
 		CE8F459E1A42976B00183FD3 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = CE5F84551A37E87500545EA4 /* Images */; };
 		CE8F459F1A42976B00183FD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9F363D1A36E4BE007D99FF /* Main.storyboard */; };
-		CE8F45A01A42976B00183FD3 /* ChanceAdRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */; };
 		CE8F45A11A42976B00183FD3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36421A36E4BE007D99FF /* LaunchScreen.xib */; };
 		CE8F45A21A42976B00183FD3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9F36401A36E4BE007D99FF /* Images.xcassets */; };
 		CE8F45A31A42976B00183FD3 /* bg in Resources */ = {isa = PBXBuildFile; fileRef = CEF08B731A40872C002B9A00 /* bg */; };
@@ -91,6 +90,13 @@
 		CE25996D1A41753800B62683 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		CE25996F1A4197D500B62683 /* FindCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCityViewController.h; sourceTree = "<group>"; };
 		CE2599701A4197D500B62683 /* FindCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCityViewController.m; sourceTree = "<group>"; };
+		CE2F9E171AC93B68003E5C61 /* ChanceAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanceAd.h; sourceTree = "<group>"; };
+		CE2F9E181AC93B68003E5C61 /* ChanceAdRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ChanceAdRes.bundle; sourceTree = "<group>"; };
+		CE2F9E191AC93B68003E5C61 /* CSADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSADRequest.h; sourceTree = "<group>"; };
+		CE2F9E1A1AC93B68003E5C61 /* CSBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSBannerView.h; sourceTree = "<group>"; };
+		CE2F9E1B1AC93B68003E5C61 /* CSInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSInterstitial.h; sourceTree = "<group>"; };
+		CE2F9E1C1AC93B68003E5C61 /* CSRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRequestError.h; sourceTree = "<group>"; };
+		CE2F9E1D1AC93B68003E5C61 /* libChanceAd_Lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libChanceAd_Lite.a; sourceTree = "<group>"; };
 		CE4AFD691A3AFAD4001C25F6 /* HourlyWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HourlyWeatherModel.h; sourceTree = "<group>"; };
 		CE4AFD6A1A3AFAD4001C25F6 /* HourlyWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HourlyWeatherModel.m; sourceTree = "<group>"; };
 		CE4AFD6C1A3AFCA0001C25F6 /* HourlyWeatherViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HourlyWeatherViewModel.h; sourceTree = "<group>"; };
@@ -103,15 +109,6 @@
 		CE5F845F1A37FB8C00545EA4 /* WeatherInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherInterface.m; sourceTree = "<group>"; };
 		CE5F84611A3800CA00545EA4 /* CurrentWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeatherModel.h; sourceTree = "<group>"; };
 		CE5F84621A3800CA00545EA4 /* CurrentWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherModel.m; sourceTree = "<group>"; };
-		CE8F45671A4288FD00183FD3 /* ChanceAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanceAd.h; sourceTree = "<group>"; };
-		CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ChanceAdRes.bundle; sourceTree = "<group>"; };
-		CE8F45691A4288FD00183FD3 /* CSADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSADRequest.h; sourceTree = "<group>"; };
-		CE8F456A1A4288FD00183FD3 /* CSBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSBannerView.h; sourceTree = "<group>"; };
-		CE8F456B1A4288FD00183FD3 /* CSInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSInterstitial.h; sourceTree = "<group>"; };
-		CE8F456C1A4288FD00183FD3 /* CSMoreGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMoreGame.h; sourceTree = "<group>"; };
-		CE8F456D1A4288FD00183FD3 /* CSNativeMoreGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNativeMoreGame.h; sourceTree = "<group>"; };
-		CE8F456E1A4288FD00183FD3 /* CSRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRequestError.h; sourceTree = "<group>"; };
-		CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libChanceAd_NoAppZone.a; sourceTree = "<group>"; };
 		CE8F45721A42895C00183FD3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CE8F45741A42896400183FD3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE8F45761A42896C00183FD3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -165,10 +162,10 @@
 				CE8F45941A42976B00183FD3 /* CoreTelephony.framework in Frameworks */,
 				CE8F45951A42976B00183FD3 /* SystemConfiguration.framework in Frameworks */,
 				CE8F45961A42976B00183FD3 /* Security.framework in Frameworks */,
+				CE2F9E1F1AC93B68003E5C61 /* libChanceAd_Lite.a in Frameworks */,
 				CE8F45971A42976B00183FD3 /* StoreKit.framework in Frameworks */,
 				CE8F45981A42976B00183FD3 /* AdSupport.framework in Frameworks */,
 				CE8F45991A42976B00183FD3 /* libPods.a in Frameworks */,
-				CE8F459A1A42976B00183FD3 /* libChanceAd_NoAppZone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,15 +263,13 @@
 		CE8F45661A4288FD00183FD3 /* cocoachinaAD */ = {
 			isa = PBXGroup;
 			children = (
-				CE8F45671A4288FD00183FD3 /* ChanceAd.h */,
-				CE8F45681A4288FD00183FD3 /* ChanceAdRes.bundle */,
-				CE8F45691A4288FD00183FD3 /* CSADRequest.h */,
-				CE8F456A1A4288FD00183FD3 /* CSBannerView.h */,
-				CE8F456B1A4288FD00183FD3 /* CSInterstitial.h */,
-				CE8F456C1A4288FD00183FD3 /* CSMoreGame.h */,
-				CE8F456D1A4288FD00183FD3 /* CSNativeMoreGame.h */,
-				CE8F456E1A4288FD00183FD3 /* CSRequestError.h */,
-				CE8F456F1A4288FD00183FD3 /* libChanceAd_NoAppZone.a */,
+				CE2F9E171AC93B68003E5C61 /* ChanceAd.h */,
+				CE2F9E181AC93B68003E5C61 /* ChanceAdRes.bundle */,
+				CE2F9E191AC93B68003E5C61 /* CSADRequest.h */,
+				CE2F9E1A1AC93B68003E5C61 /* CSBannerView.h */,
+				CE2F9E1B1AC93B68003E5C61 /* CSInterstitial.h */,
+				CE2F9E1C1AC93B68003E5C61 /* CSRequestError.h */,
+				CE2F9E1D1AC93B68003E5C61 /* libChanceAd_Lite.a */,
 			);
 			path = cocoachinaAD;
 			sourceTree = "<group>";
@@ -492,7 +487,7 @@
 				CE8F459C1A42976B00183FD3 /* SummaryViewAD.xib in Resources */,
 				CE8F459E1A42976B00183FD3 /* Images in Resources */,
 				CE8F459F1A42976B00183FD3 /* Main.storyboard in Resources */,
-				CE8F45A01A42976B00183FD3 /* ChanceAdRes.bundle in Resources */,
+				CE2F9E1E1AC93B68003E5C61 /* ChanceAdRes.bundle in Resources */,
 				CE8F45A11A42976B00183FD3 /* LaunchScreen.xib in Resources */,
 				CE8F45A21A42976B00183FD3 /* Images.xcassets in Resources */,
 				CED855251A43DDAD00C26A95 /* refresh.plist in Resources */,
@@ -507,7 +502,6 @@
 				CE5F84591A37EE1600545EA4 /* SummaryView.xib in Resources */,
 				CE5F84561A37E87500545EA4 /* Images in Resources */,
 				CE9F363F1A36E4BE007D99FF /* Main.storyboard in Resources */,
-				CE8F45701A4288FD00183FD3 /* ChanceAdRes.bundle in Resources */,
 				CE9F36441A36E4BE007D99FF /* LaunchScreen.xib in Resources */,
 				CE9F36411A36E4BE007D99FF /* Images.xcassets in Resources */,
 				CED855241A43DDAD00C26A95 /* refresh.plist in Resources */,

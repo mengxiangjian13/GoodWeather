@@ -46,11 +46,15 @@ typedef void (^CSInterstitialDidDismiss)();
 @property (nonatomic, assign) BOOL autoCloseAfterCountDown;
 // 是否显示关闭按钮，默认为YES
 @property (nonatomic, assign) BOOL showCloseButton;
+// 广告是否准备好。准备好则show或fill马上就能展现，否则可能需要等待
+@property (nonatomic, readonly) BOOL isReady;
+// 关闭时是否加载下一个广告（默认值为YES）
+@property (nonatomic, assign) BOOL loadNextWhenClose;
 // 积分墙当前状态
 @property (nonatomic, readonly) CSInterstitialStatus status;
 // 弹出广告图片尺寸
 @property (nonatomic, readonly) CGSize interstitialSize;
-// CSInterstitial不再使用时，必须将delegate设置为nil。
+// 弹出广告回调代理
 @property (nonatomic, assign) id <CSInterstitialDelegate> delegate;
 
 // 弹出广告加载完成的block
@@ -80,29 +84,23 @@ typedef void (^CSInterstitialDidDismiss)();
  *	@brief	显示弹出广告
  *
  *	@param 	scale 	显示比例（开发者想由后台设定显示比例，则该值设置为0即可）
- *
- *	@return	是否能展现出来
  */
-- (BOOL)showInterstitialWithScale:(CGFloat)scale;
+- (void)showInterstitialWithScale:(CGFloat)scale;
 
 /**
  *	@brief	显示弹出广告
  *
  *	@param 	rootView 	弹出广告的父视图
  *	@param 	scale 	显示比例（开发者想由后台设定显示比例，则该值设置为0即可）
- *
- *	@return	是否能展现出来
  */
-- (BOOL)showInterstitialOnRootView:(UIView *)rootView withScale:(CGFloat)scale;
+- (void)showInterstitialOnRootView:(UIView *)rootView withScale:(CGFloat)scale;
 
 /**
  *	@brief	用弹出广告填充view
  *
  *	@param 	弹出广告的容器
- *
- *	@return	是否能展现出来
  */
-- (BOOL)fillInterstitialInView:(UIView *)view;
+- (void)fillInterstitialInView:(UIView *)view;
 
 /**
  *	@brief	关闭弹出广告
